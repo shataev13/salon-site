@@ -11,10 +11,14 @@ import {
 import BookingButton from "./booking/BookingButton";
 
 const navLinkClass =
-  "text-sm font-medium tracking-wide text-white/80 transition-colors hover:text-white";
+  "text-sm font-medium tracking-wide text-ink/70 transition-colors hover:text-ink";
 
 const accentLinkClass =
-  "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 py-1.5 text-[13px] font-medium text-brand-50 ring-1 ring-brand-300/45 transition-colors hover:bg-brand-400/20 hover:text-white";
+  "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 py-1.5 text-[13px] font-medium text-brand-600 ring-1 ring-brand-200 transition-colors hover:bg-brand-50 hover:text-brand-700";
+
+// Круглые иконки связи — фиолетовые, на белом хедере.
+const iconButtonClass =
+  "grid place-items-center rounded-full text-brand-600 ring-1 ring-brand-200 transition-colors hover:bg-brand-50 hover:text-brand-700";
 
 const plainLinks = NAV_LINKS.filter((l) => !l.hasMenu && !l.accent);
 const giftCard = NAV_LINKS.find((l) => l.accent);
@@ -171,7 +175,7 @@ export default function Header() {
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <header className="absolute inset-x-0 top-0 z-40">
+    <header className="absolute inset-x-0 top-0 z-40 border-b border-ink/5 bg-background shadow-[0_14px_40px_-28px_var(--brand-950)]">
       <div className="relative mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-5 sm:px-8 sm:py-6">
         {/* Левая зона: бургер (моб.) либо навигация + «Подарочные карты». */}
         <div className="flex items-center">
@@ -181,7 +185,7 @@ export default function Header() {
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
             onClick={() => setMenuOpen(true)}
-            className="grid size-10 place-items-center rounded-full text-white/90 transition-colors hover:bg-white/10 xl:hidden"
+            className="grid size-10 place-items-center rounded-full text-brand-600 transition-colors hover:bg-brand-50 xl:hidden"
           >
             <svg
               aria-hidden="true"
@@ -213,13 +217,13 @@ export default function Header() {
         </div>
 
         {/* Центр: вордмарк строго по центру (абсолютно — не зависит от боков).
-            brand-400 — ступень фирменной шкалы, читается на тёмном видео. */}
+            На белом хедере — истинный фирменный цвет brand-500 (#8C3899). */}
         <Link
           href="#top"
           aria-label="Shati Studio — на главную"
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
         >
-          <span className="u-wordmark font-display text-2xl font-bold tracking-[0.2em] text-brand-400 max-[345px]:text-xl sm:text-3xl">
+          <span className="u-wordmark font-display text-2xl font-bold tracking-[0.2em] text-brand-500 max-[345px]:text-xl sm:text-3xl">
             SHATI
           </span>
         </Link>
@@ -235,7 +239,7 @@ export default function Header() {
                 href={c.href}
                 aria-label={c.label}
                 {...contactExternalProps(c)}
-                className="grid size-9 place-items-center rounded-full text-white/80 ring-1 ring-white/15 transition-colors hover:bg-white/10 hover:text-white"
+                className={`size-9 ${iconButtonClass}`}
               >
                 <ContactGlyph name={c.icon} />
               </a>
@@ -249,7 +253,7 @@ export default function Header() {
               <a
                 href={phoneContact.href}
                 aria-label={phoneContact.label}
-                className="grid size-10 place-items-center rounded-full text-white/85 ring-1 ring-white/15 transition-colors hover:bg-white/10 hover:text-white"
+                className={`size-10 ${iconButtonClass}`}
               >
                 <ContactGlyph name="phone" />
               </a>
@@ -364,7 +368,7 @@ export default function Header() {
                   href={c.href}
                   aria-label={c.label}
                   {...contactExternalProps(c)}
-                  className="grid size-11 place-items-center rounded-full text-ink/70 ring-1 ring-brand-100 transition-colors hover:bg-surface hover:text-brand-600"
+                  className={`size-11 ${iconButtonClass}`}
                 >
                   <ContactGlyph name={c.icon} />
                 </a>
