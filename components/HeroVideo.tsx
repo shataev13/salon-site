@@ -35,8 +35,7 @@ export default function HeroVideo() {
       aria-hidden="true"
       tabIndex={-1}
     >
-      {/* Добавьте ролик в /public, чтобы он заиграл: */}
-      <source src="/hero.webm" type="video/webm" />
+      {/* Фоновый ролик салона. */}
       <source src="/hero.mp4" type="video/mp4" />
     </video>
   );
