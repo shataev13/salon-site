@@ -28,10 +28,10 @@ export default function Logo({
 
   return (
     <Image
-      src="/logo.png"
+      src="/ShatiStudio_logo.webp"
       alt="Shati Studio"
-      width={240}
-      height={64}
+      width={1866}
+      height={433}
       priority
       onError={() => setFailed(true)}
       className={imgClassName}

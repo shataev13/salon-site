@@ -235,7 +235,7 @@ export default function Header() {
             aria-label="Shati Studio — на главную"
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
           >
-            <Logo imgClassName="h-11 w-auto" textClassName="text-4xl" />
+            <Logo imgClassName="h-12 w-auto" textClassName="text-4xl" />
           </Link>
 
           <div className="flex items-center gap-2">
