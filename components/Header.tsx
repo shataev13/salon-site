@@ -18,6 +18,7 @@ const accentLinkClass =
 
 const plainLinks = NAV_LINKS.filter((l) => !l.hasMenu && !l.accent);
 const giftCard = NAV_LINKS.find((l) => l.accent);
+const phoneContact = CONTACTS.find((c) => c.icon === "phone");
 
 function Sparkle() {
   return (
@@ -218,7 +219,7 @@ export default function Header() {
           aria-label="Shati Studio — на главную"
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
         >
-          <span className="u-wordmark font-display text-2xl font-bold tracking-[0.2em] text-brand-400 sm:text-3xl">
+          <span className="u-wordmark font-display text-2xl font-bold tracking-[0.2em] text-brand-400 max-[345px]:text-xl sm:text-3xl">
             SHATI
           </span>
         </Link>
@@ -243,7 +244,16 @@ export default function Header() {
           <div className="hidden xl:block">
             <BookingButton size="md" />
           </div>
-          <div className="xl:hidden">
+          <div className="flex items-center gap-2 xl:hidden">
+            {phoneContact && (
+              <a
+                href={phoneContact.href}
+                aria-label={phoneContact.label}
+                className="grid size-10 place-items-center rounded-full text-white/85 ring-1 ring-white/15 transition-colors hover:bg-white/10 hover:text-white"
+              >
+                <ContactGlyph name="phone" />
+              </a>
+            )}
             <BookingButton variant="icon" />
           </div>
         </div>
