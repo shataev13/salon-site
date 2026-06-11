@@ -9,23 +9,54 @@ const sizeClasses: Record<Size, string> = {
   lg: "h-14 px-9 text-base sm:text-lg",
 };
 
-/* Главное действие сайта. Все экземпляры открывают одну модалку записи. */
+const baseClass =
+  "group bg-brand-500 text-white shadow-[0_8px_30px_-12px_var(--brand-700)] transition-[background-color,transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:bg-brand-600 hover:shadow-[0_14px_40px_-12px_var(--brand-600)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300 focus-visible:ring-offset-2 focus-visible:ring-offset-background active:translate-y-0";
+
+/* Главное действие сайта. Все экземпляры открывают одну модалку записи.
+   variant="icon" — компактная круглая кнопка (мобильный хедер). */
 export default function BookingButton({
   size = "md",
   className = "",
   label = "Записаться",
+  variant = "pill",
 }: {
   size?: Size;
   className?: string;
   label?: string;
+  variant?: "pill" | "icon";
 }) {
   const { open } = useBooking();
+
+  if (variant === "icon") {
+    return (
+      <button
+        type="button"
+        onClick={open}
+        aria-label={label}
+        className={`grid size-10 place-items-center rounded-full ${baseClass} ${className}`}
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          className="size-5"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <rect x="3" y="4.5" width="18" height="16" rx="2.5" />
+          <path d="M3 9h18M8 2.5v4M16 2.5v4" />
+        </svg>
+      </button>
+    );
+  }
 
   return (
     <button
       type="button"
       onClick={open}
-      className={`group inline-flex items-center justify-center gap-2 rounded-full bg-brand-500 font-medium tracking-wide text-white shadow-[0_8px_30px_-12px_var(--brand-700)] transition-[background-color,transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:bg-brand-600 hover:shadow-[0_14px_40px_-12px_var(--brand-600)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300 focus-visible:ring-offset-2 focus-visible:ring-offset-background active:translate-y-0 ${sizeClasses[size]} ${className}`}
+      className={`inline-flex items-center justify-center gap-2 rounded-full font-medium tracking-wide ${baseClass} ${sizeClasses[size]} ${className}`}
     >
       {label}
       <svg

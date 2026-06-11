@@ -3,11 +3,10 @@
 import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import {
+  CONTACTS,
   NAV_LINKS,
-  PHONE_DISPLAY,
-  PHONE_HREF,
   SERVICE_CATEGORIES,
-  type NavLink,
+  type Contact,
 } from "@/lib/site";
 import BookingButton from "./booking/BookingButton";
 
@@ -16,6 +15,9 @@ const navLinkClass =
 
 const accentLinkClass =
   "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 py-1.5 text-[13px] font-medium text-brand-50 ring-1 ring-brand-300/45 transition-colors hover:bg-brand-400/20 hover:text-white";
+
+const plainLinks = NAV_LINKS.filter((l) => !l.hasMenu && !l.accent);
+const giftCard = NAV_LINKS.find((l) => l.accent);
 
 function Sparkle() {
   return (
@@ -29,6 +31,33 @@ function Sparkle() {
     </svg>
   );
 }
+
+/* Иконки мессенджеров/телефона для быстрой связи. */
+function ContactGlyph({ name }: { name: Contact["icon"] }) {
+  switch (name) {
+    case "phone":
+      return (
+        <svg viewBox="0 0 24 24" className="size-[18px]" fill="currentColor" aria-hidden="true">
+          <path d="M6.62 10.79c1.44 2.83 3.76 5.15 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.07 21 3 13.93 3 5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.24.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+        </svg>
+      );
+    case "whatsapp":
+      return (
+        <svg viewBox="0 0 24 24" className="size-[18px]" fill="currentColor" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+      );
+    case "telegram":
+      return (
+        <svg viewBox="0 0 24 24" className="size-[18px]" fill="currentColor" aria-hidden="true">
+          <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212-.07-.062-.174-.041-.249-.024-.106.024-1.793 1.139-5.061 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.44-.751-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+        </svg>
+      );
+  }
+}
+
+const contactExternalProps = (c: Contact) =>
+  c.external ? { target: "_blank", rel: "noopener noreferrer" } : {};
 
 /* Выпадающий список категорий для пункта «Услуги». */
 function ServicesDropdown() {
@@ -115,29 +144,10 @@ function ServicesDropdown() {
   );
 }
 
-function renderLink(link: NavLink, onClick?: () => void) {
-  return (
-    <Link
-      key={link.href}
-      href={link.href}
-      onClick={onClick}
-      className={link.accent ? accentLinkClass : navLinkClass}
-    >
-      {link.accent && <Sparkle />}
-      {link.label}
-    </Link>
-  );
-}
-
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
-
-  const leftLinks = NAV_LINKS.filter((l) => !l.accent).slice(0, 3);
-  const rightLinks = NAV_LINKS.filter(
-    (l) => l.label === "Подарочные карты" || l.label === "Контакты",
-  );
 
   // Блокировка прокрутки, Escape и фокус для мобильного меню.
   useEffect(() => {
@@ -161,73 +171,81 @@ export default function Header() {
 
   return (
     <header className="absolute inset-x-0 top-0 z-40">
-      <div className="mx-auto grid max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 py-5 sm:px-8 sm:py-6">
-        {/* Левая зона: десктоп-навигация / мобильный бургер. */}
-        <nav className="hidden items-center gap-7 justify-self-start xl:flex">
-          <ServicesDropdown />
-          {leftLinks
-            .filter((l) => !l.hasMenu)
-            .map((link) => renderLink(link))}
-        </nav>
-        <button
-          type="button"
-          aria-label="Открыть меню"
-          aria-expanded={menuOpen}
-          aria-controls="mobile-menu"
-          onClick={() => setMenuOpen(true)}
-          className="grid size-10 place-items-center justify-self-start rounded-full text-white/90 transition-colors hover:bg-white/10 xl:hidden"
-        >
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 24 24"
-            className="size-6"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            strokeLinecap="round"
+      <div className="relative mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-5 sm:px-8 sm:py-6">
+        {/* Левая зона: бургер (моб.) либо навигация + «Подарочные карты». */}
+        <div className="flex items-center">
+          <button
+            type="button"
+            aria-label="Открыть меню"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            onClick={() => setMenuOpen(true)}
+            className="grid size-10 place-items-center rounded-full text-white/90 transition-colors hover:bg-white/10 xl:hidden"
           >
-            <path d="M4 7h16M4 12h16M4 17h16" />
-          </svg>
-        </button>
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              className="size-6"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+            >
+              <path d="M4 7h16M4 12h16M4 17h16" />
+            </svg>
+          </button>
 
-        {/* Центр: вордмарк. brand-400 — ступень фирменной шкалы,
-            читается на тёмном видео и остаётся узнаваемо «фирменной». */}
+          <nav className="hidden items-center gap-6 xl:flex">
+            <ServicesDropdown />
+            {plainLinks.map((link) => (
+              <Link key={link.href} href={link.href} className={navLinkClass}>
+                {link.label}
+              </Link>
+            ))}
+            {giftCard && (
+              <Link href={giftCard.href} className={accentLinkClass}>
+                <Sparkle />
+                {giftCard.label}
+              </Link>
+            )}
+          </nav>
+        </div>
+
+        {/* Центр: вордмарк строго по центру (абсолютно — не зависит от боков).
+            brand-400 — ступень фирменной шкалы, читается на тёмном видео. */}
         <Link
           href="#top"
           aria-label="Shati Studio — на главную"
-          className="justify-self-center"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
         >
           <span className="u-wordmark font-display text-2xl font-bold tracking-[0.2em] text-brand-400 sm:text-3xl">
             SHATI
           </span>
         </Link>
 
-        {/* Правая зона: десктоп-действия / мобильная кнопка записи. */}
-        <div className="hidden items-center gap-5 justify-self-end xl:flex">
-          {rightLinks.map((link) => renderLink(link))}
-          <span aria-hidden="true" className="h-5 w-px bg-white/20" />
-          <a
-            href={PHONE_HREF}
-            className={`inline-flex items-center gap-2 whitespace-nowrap ${navLinkClass}`}
-          >
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 24 24"
-              className="size-4"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M6.5 4h3l1.5 4-2 1.5a11 11 0 005 5l1.5-2 4 1.5v3a2 2 0 01-2.2 2A16 16 0 014.5 6.2 2 2 0 016.5 4z" />
-            </svg>
-            {PHONE_DISPLAY}
-          </a>
-          <BookingButton size="md" />
-        </div>
-        <div className="justify-self-end xl:hidden">
-          <BookingButton size="md" className="h-10 px-5 text-sm" />
+        {/* Правая зона: иконки связи (десктоп) + кнопка записи.
+            На мобайле — компактная круглая кнопка, чтобы логотип оставался
+            строго по центру. */}
+        <div className="flex items-center gap-3">
+          <div className="hidden items-center gap-2 xl:flex">
+            {CONTACTS.map((c) => (
+              <a
+                key={c.icon}
+                href={c.href}
+                aria-label={c.label}
+                {...contactExternalProps(c)}
+                className="grid size-9 place-items-center rounded-full text-white/80 ring-1 ring-white/15 transition-colors hover:bg-white/10 hover:text-white"
+              >
+                <ContactGlyph name={c.icon} />
+              </a>
+            ))}
+          </div>
+          <div className="hidden xl:block">
+            <BookingButton size="md" />
+          </div>
+          <div className="xl:hidden">
+            <BookingButton variant="icon" />
+          </div>
         </div>
       </div>
 
@@ -305,29 +323,44 @@ export default function Header() {
               </ul>
             )}
 
-            {NAV_LINKS.filter((l) => !l.hasMenu).map((link) => (
+            {plainLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={closeMenu}
-                className={`flex items-center gap-2 py-3 font-display text-2xl ${
-                  link.accent ? "text-brand-600" : "text-ink"
-                }`}
+                className="py-3 font-display text-2xl text-ink"
               >
-                {link.accent && <Sparkle />}
                 {link.label}
               </Link>
             ))}
+            {giftCard && (
+              <Link
+                href={giftCard.href}
+                onClick={closeMenu}
+                className="flex items-center gap-2 py-3 font-display text-2xl text-brand-600"
+              >
+                <Sparkle />
+                {giftCard.label}
+              </Link>
+            )}
           </nav>
 
           <div className="border-t border-brand-100 px-5 py-6 sm:px-8">
-            <a
-              href={PHONE_HREF}
-              className="block text-center text-lg font-medium text-ink"
-            >
-              {PHONE_DISPLAY}
-            </a>
-            <div className="mt-4">
+            {/* Контакты иконками — без текста, действие по клику. */}
+            <div className="flex items-center justify-center gap-3">
+              {CONTACTS.map((c) => (
+                <a
+                  key={c.icon}
+                  href={c.href}
+                  aria-label={c.label}
+                  {...contactExternalProps(c)}
+                  className="grid size-11 place-items-center rounded-full text-ink/70 ring-1 ring-brand-100 transition-colors hover:bg-surface hover:text-brand-600"
+                >
+                  <ContactGlyph name={c.icon} />
+                </a>
+              ))}
+            </div>
+            <div className="mt-5">
               <BookingButton size="lg" className="w-full" />
             </div>
           </div>
