@@ -226,9 +226,9 @@ export default function Header() {
 
       {/* === Десктоп (>= lg): два яруса как у reference === */}
       <div className="hidden lg:block">
-        {/* Ярус 1: запись · логотип по центру · иконки связи */}
+        {/* Ярус 1: иконка записи · логотип по центру · иконки связи */}
         <div className="relative mx-auto flex max-w-7xl items-center justify-between gap-4 px-8 pt-6 pb-4">
-          <BookingButton size="md" />
+          <BookingButton variant="icon" />
 
           <Link
             href="#top"
