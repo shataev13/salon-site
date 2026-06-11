@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Playfair_Display, Inter, Pacifico } from "next/font/google";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -11,6 +11,14 @@ const playfair = Playfair_Display({
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin", "cyrillic"],
+  display: "swap",
+});
+
+// Скрипт-шрифт для временного вордмарка, пока нет файла логотипа.
+const pacifico = Pacifico({
+  variable: "--font-pacifico",
+  subsets: ["latin"],
+  weight: "400",
   display: "swap",
 });
 
@@ -28,7 +36,7 @@ export default function RootLayout({
   return (
     <html
       lang="ru"
-      className={`${playfair.variable} ${inter.variable} h-full antialiased`}
+      className={`${playfair.variable} ${inter.variable} ${pacifico.variable} h-full antialiased`}
     >
       <body className="min-h-full">{children}</body>
     </html>

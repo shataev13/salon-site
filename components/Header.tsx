@@ -9,6 +9,7 @@ import {
   type Contact,
 } from "@/lib/site";
 import BookingButton from "./booking/BookingButton";
+import Logo from "./Logo";
 
 // Нижний ярус навигации — капс с трекингом (в духе reference).
 const navTierClass =
@@ -206,9 +207,7 @@ export default function Header() {
           aria-label="Shati Studio — на главную"
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
         >
-          <span className="u-wordmark font-display text-2xl font-bold tracking-[0.2em] text-brand-500 max-[345px]:text-xl">
-            SHATI
-          </span>
+          <Logo imgClassName="h-8 w-auto" textClassName="text-xl" />
         </Link>
 
         <div className="flex items-center gap-2">
@@ -236,9 +235,7 @@ export default function Header() {
             aria-label="Shati Studio — на главную"
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
           >
-            <span className="u-wordmark font-display text-4xl font-bold tracking-[0.2em] text-brand-500">
-              SHATI
-            </span>
+            <Logo imgClassName="h-11 w-auto" textClassName="text-4xl" />
           </Link>
 
           <div className="flex items-center gap-2">
@@ -286,9 +283,7 @@ export default function Header() {
           className="u-fade-in fixed inset-0 z-50 flex flex-col bg-background lg:hidden"
         >
           <div className="flex items-center justify-between px-5 py-5 sm:px-8">
-            <span className="font-display text-2xl font-bold tracking-[0.2em] text-brand-500">
-              SHATI
-            </span>
+            <Logo imgClassName="h-8 w-auto" textClassName="text-2xl" />
             <button
               ref={closeButtonRef}
               type="button"
