@@ -10,11 +10,13 @@ import {
 } from "@/lib/site";
 import BookingButton from "./booking/BookingButton";
 
-const navLinkClass =
-  "text-sm font-medium tracking-wide text-ink/70 transition-colors hover:text-ink";
+// Нижний ярус навигации — капс с трекингом (в духе reference).
+const navTierClass =
+  "text-[13px] font-medium uppercase tracking-[0.16em] text-ink/65 transition-colors hover:text-brand-600";
 
-const accentLinkClass =
-  "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 py-1.5 text-[13px] font-medium text-brand-600 ring-1 ring-brand-200 transition-colors hover:bg-brand-50 hover:text-brand-700";
+// Акцентный пункт «Подарочные карты» в нижнем ярусе.
+const giftTierClass =
+  "inline-flex items-center gap-1.5 whitespace-nowrap text-[13px] font-medium uppercase tracking-[0.16em] text-brand-600 transition-colors hover:text-brand-700";
 
 // Круглые иконки связи — фиолетовые, на белом хедере.
 const iconButtonClass =
@@ -95,7 +97,7 @@ function ServicesDropdown() {
         aria-expanded={open}
         aria-controls={menuId}
         onClick={() => setOpen((v) => !v)}
-        className={`inline-flex items-center gap-1.5 ${navLinkClass}`}
+        className={`inline-flex items-center gap-1.5 ${navTierClass}`}
       >
         Услуги
         <svg
@@ -115,7 +117,7 @@ function ServicesDropdown() {
       <div
         id={menuId}
         role="menu"
-        className={`absolute left-0 top-full z-50 mt-4 w-80 transition duration-200 ${
+        className={`absolute left-1/2 top-full z-50 mt-4 w-80 -translate-x-1/2 transition duration-200 ${
           open
             ? "visible translate-y-0 opacity-100"
             : "invisible -translate-y-1 opacity-0"
@@ -176,63 +178,70 @@ export default function Header() {
 
   return (
     <header className="absolute inset-x-0 top-0 z-40 border-b border-ink/5 bg-background shadow-[0_14px_40px_-28px_var(--brand-950)]">
-      <div className="relative mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-5 sm:px-8 sm:py-6">
-        {/* Левая зона: бургер (моб.) либо навигация + «Подарочные карты». */}
-        <div className="flex items-center">
-          <button
-            type="button"
-            aria-label="Открыть меню"
-            aria-expanded={menuOpen}
-            aria-controls="mobile-menu"
-            onClick={() => setMenuOpen(true)}
-            className="grid size-10 place-items-center rounded-full text-brand-600 transition-colors hover:bg-brand-50 xl:hidden"
+      {/* === Мобайл / планшет (< lg): бургер · логотип · телефон + запись === */}
+      <div className="relative mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-5 sm:px-8 sm:py-6 lg:hidden">
+        <button
+          type="button"
+          aria-label="Открыть меню"
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
+          onClick={() => setMenuOpen(true)}
+          className="grid size-10 place-items-center rounded-full text-brand-600 transition-colors hover:bg-brand-50"
+        >
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            className="size-6"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
           >
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 24 24"
-              className="size-6"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-            >
-              <path d="M4 7h16M4 12h16M4 17h16" />
-            </svg>
-          </button>
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
 
-          <nav className="hidden items-center gap-6 xl:flex">
-            <ServicesDropdown />
-            {plainLinks.map((link) => (
-              <Link key={link.href} href={link.href} className={navLinkClass}>
-                {link.label}
-              </Link>
-            ))}
-            {giftCard && (
-              <Link href={giftCard.href} className={accentLinkClass}>
-                <Sparkle />
-                {giftCard.label}
-              </Link>
-            )}
-          </nav>
-        </div>
-
-        {/* Центр: вордмарк строго по центру (абсолютно — не зависит от боков).
-            На белом хедере — истинный фирменный цвет brand-500 (#8C3899). */}
         <Link
           href="#top"
           aria-label="Shati Studio — на главную"
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
         >
-          <span className="u-wordmark font-display text-2xl font-bold tracking-[0.2em] text-brand-500 max-[345px]:text-xl sm:text-3xl">
+          <span className="u-wordmark font-display text-2xl font-bold tracking-[0.2em] text-brand-500 max-[345px]:text-xl">
             SHATI
           </span>
         </Link>
 
-        {/* Правая зона: иконки связи (десктоп) + кнопка записи.
-            На мобайле — компактная круглая кнопка, чтобы логотип оставался
-            строго по центру. */}
-        <div className="flex items-center gap-3">
-          <div className="hidden items-center gap-2 xl:flex">
+        <div className="flex items-center gap-2">
+          {phoneContact && (
+            <a
+              href={phoneContact.href}
+              aria-label={phoneContact.label}
+              className={`size-10 ${iconButtonClass}`}
+            >
+              <ContactGlyph name="phone" />
+            </a>
+          )}
+          <BookingButton variant="icon" />
+        </div>
+      </div>
+
+      {/* === Десктоп (>= lg): два яруса как у reference === */}
+      <div className="hidden lg:block">
+        {/* Ярус 1: запись · логотип по центру · иконки связи */}
+        <div className="relative mx-auto flex max-w-7xl items-center justify-between gap-4 px-8 pt-6 pb-4">
+          <BookingButton size="md" />
+
+          <Link
+            href="#top"
+            aria-label="Shati Studio — на главную"
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+          >
+            <span className="u-wordmark font-display text-4xl font-bold tracking-[0.2em] text-brand-500">
+              SHATI
+            </span>
+          </Link>
+
+          <div className="flex items-center gap-2">
             {CONTACTS.map((c) => (
               <a
                 key={c.icon}
@@ -245,22 +254,26 @@ export default function Header() {
               </a>
             ))}
           </div>
-          <div className="hidden xl:block">
-            <BookingButton size="md" />
-          </div>
-          <div className="flex items-center gap-2 xl:hidden">
-            {phoneContact && (
-              <a
-                href={phoneContact.href}
-                aria-label={phoneContact.label}
-                className={`size-10 ${iconButtonClass}`}
-              >
-                <ContactGlyph name="phone" />
-              </a>
-            )}
-            <BookingButton variant="icon" />
-          </div>
         </div>
+
+        {/* Разделитель на всю ширину */}
+        <div className="border-t border-ink/10" />
+
+        {/* Ярус 2: навигация по центру */}
+        <nav className="mx-auto flex max-w-7xl items-center justify-center gap-9 px-8 py-3.5">
+          <ServicesDropdown />
+          {plainLinks.map((link) => (
+            <Link key={link.href} href={link.href} className={navTierClass}>
+              {link.label}
+            </Link>
+          ))}
+          {giftCard && (
+            <Link href={giftCard.href} className={giftTierClass}>
+              <Sparkle />
+              {giftCard.label}
+            </Link>
+          )}
+        </nav>
       </div>
 
       {/* Мобильное меню. */}
@@ -270,7 +283,7 @@ export default function Header() {
           role="dialog"
           aria-modal="true"
           aria-label="Меню"
-          className="u-fade-in fixed inset-0 z-50 flex flex-col bg-background xl:hidden"
+          className="u-fade-in fixed inset-0 z-50 flex flex-col bg-background lg:hidden"
         >
           <div className="flex items-center justify-between px-5 py-5 sm:px-8">
             <span className="font-display text-2xl font-bold tracking-[0.2em] text-brand-500">
