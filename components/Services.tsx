@@ -1,17 +1,4 @@
-type Category = {
-  index: string;
-  title: string;
-  href: string;
-  /* Класс-плейсхолдер под фото (заменяется реальным снимком). */
-  placeholder: string;
-};
-
-const CATEGORIES: Category[] = [
-  { index: "01", title: "Наращивание ресниц", href: "#", placeholder: "u-ph-1" },
-  { index: "02", title: "СПА", href: "#", placeholder: "u-ph-2" },
-  { index: "03", title: "Ногтевой сервис", href: "#", placeholder: "u-ph-3" },
-  { index: "04", title: "Парикмахерский зал", href: "#", placeholder: "u-ph-4" },
-];
+import { SERVICES } from "@/lib/site";
 
 export default function Services() {
   return (
@@ -43,16 +30,16 @@ export default function Services() {
 
         {/* Сетка: 4 → 2 (≤1024px) → 1 (≤560px). */}
         <ul className="mt-12 grid grid-cols-1 gap-[22px] min-[560px]:grid-cols-2 sm:mt-16 lg:grid-cols-4">
-          {CATEGORIES.map((category) => (
-            <li key={category.index}>
+          {SERVICES.map((service, index) => (
+            <li key={service.title}>
               <a
-                href={category.href}
-                aria-label={category.title}
+                href="#"
+                aria-label={service.title}
                 className="group relative block aspect-[3/4] overflow-hidden rounded-[20px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-warm"
               >
                 {/* Слот под фото: лёгкий zoom на hover. */}
                 <div
-                  className={`absolute inset-0 ${category.placeholder} transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.045]`}
+                  className={`absolute inset-0 ${service.placeholder} transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.045]`}
                 />
                 {/* Затемнение снизу под текст. */}
                 <div className="absolute inset-0 bg-gradient-to-t from-ink-deep/85 via-ink-deep/25 to-transparent" />
@@ -62,13 +49,13 @@ export default function Services() {
                   aria-hidden="true"
                   className="absolute left-5 top-5 text-sm font-medium tracking-widest text-white/80"
                 >
-                  {category.index}
+                  {String(index + 1).padStart(2, "0")}
                 </span>
 
                 {/* Подпись. */}
                 <div className="absolute inset-x-0 bottom-0 p-5">
                   <h3 className="text-base font-semibold uppercase leading-snug tracking-[0.12em] text-white">
-                    {category.title}
+                    {service.title}
                   </h3>
                   {/* Акцентная линия, удлиняется на hover. */}
                   <span

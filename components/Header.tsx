@@ -5,7 +5,7 @@ import Link from "next/link";
 import {
   CONTACTS,
   NAV_LINKS,
-  SERVICE_CATEGORIES,
+  SERVICES,
   type Contact,
 } from "@/lib/site";
 import BookingButton from "./booking/BookingButton";
@@ -128,8 +128,8 @@ function ServicesDropdown() {
           {/* Эхо «светового штриха» — тонкая фирменная линия. */}
           <div className="h-px w-full bg-gradient-to-r from-transparent via-brand-400 to-transparent" />
           <ul className="p-2">
-            {SERVICE_CATEGORIES.map((cat) => (
-              <li key={cat.label}>
+            {SERVICES.map((service) => (
+              <li key={service.title}>
                 <Link
                   href="#services"
                   role="menuitem"
@@ -137,10 +137,10 @@ function ServicesDropdown() {
                   className="block rounded-xl px-4 py-2.5 transition-colors hover:bg-surface"
                 >
                   <span className="block text-sm font-medium text-ink">
-                    {cat.label}
+                    {service.title}
                   </span>
                   <span className="mt-0.5 block text-xs text-ink/55">
-                    {cat.description}
+                    {service.description}
                   </span>
                 </Link>
               </li>
@@ -332,14 +332,14 @@ export default function Header() {
             </button>
             {mobileServicesOpen && (
               <ul className="u-accordion mb-2 flex flex-col gap-1 border-l border-brand-100 pl-4">
-                {SERVICE_CATEGORIES.map((cat) => (
-                  <li key={cat.label}>
+                {SERVICES.map((service) => (
+                  <li key={service.title}>
                     <Link
                       href="#services"
                       onClick={closeMenu}
                       className="block py-2 text-base text-ink/70 transition-colors hover:text-brand-600"
                     >
-                      {cat.label}
+                      {service.title}
                     </Link>
                   </li>
                 ))}

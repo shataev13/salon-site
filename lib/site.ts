@@ -22,19 +22,21 @@ export const CONTACTS: Contact[] = [
   { label: "Telegram", href: TELEGRAM_HREF, icon: "telegram", external: true },
 ];
 
-export type ServiceCategory = {
-  label: string;
+export type Service = {
+  title: string;
+  /* Короткое описание для выпадающего списка в хедере. */
   description: string;
+  /* Класс-плейсхолдер фото для карточки (слот). */
+  placeholder: string;
 };
 
-/* Категории для выпадающего списка «Услуги». */
-export const SERVICE_CATEGORIES: ServiceCategory[] = [
-  { label: "Парикмахерский зал", description: "Стрижки и укладки" },
-  { label: "Окрашивание", description: "Сложные техники и тон в тон" },
-  { label: "Маникюр и педикюр", description: "Уход и покрытие" },
-  { label: "Брови и ресницы", description: "Форма, ламинирование" },
-  { label: "Косметология", description: "Лицо и уходовые процедуры" },
-  { label: "Макияж", description: "Дневной, вечерний, образ" },
+/* Единый источник категорий услуг — общий для блока «Услуги» (карточки)
+   и выпадающего списка «Услуги» в хедере. */
+export const SERVICES: Service[] = [
+  { title: "Массаж", description: "Расслабление и уход за телом", placeholder: "u-ph-1" },
+  { title: "СПА", description: "Обёртывания и программы для тела", placeholder: "u-ph-2" },
+  { title: "Ногтевой сервис", description: "Маникюр, педикюр, покрытие", placeholder: "u-ph-3" },
+  { title: "Парикмахерский зал", description: "Стрижки и укладки", placeholder: "u-ph-4" },
 ];
 
 export type NavLink = {
