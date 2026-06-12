@@ -164,7 +164,8 @@ export default function Header({
 
   const positionClass =
     variant === "overlay" ? "absolute inset-x-0 top-0" : "sticky top-0";
-  const homeHref = variant === "overlay" ? "#top" : "/";
+  // Логотип всегда ведёт на главную страницу — с любой страницы сайта.
+  const homeHref = "/";
 
   // Блокировка прокрутки, Escape и фокус для мобильного меню.
   useEffect(() => {
@@ -242,7 +243,7 @@ export default function Header({
           <BookingButton variant="icon" />
 
           <Link
-            href="#top"
+            href={homeHref}
             aria-label="Shati Studio — на главную"
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
           >
