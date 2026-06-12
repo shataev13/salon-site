@@ -7,10 +7,10 @@ type Category = {
 };
 
 const CATEGORIES: Category[] = [
-  { index: "01", title: "Наращивание ресниц", href: "#", placeholder: "svc-ph-1" },
-  { index: "02", title: "СПА", href: "#", placeholder: "svc-ph-2" },
-  { index: "03", title: "Ногтевой сервис", href: "#", placeholder: "svc-ph-3" },
-  { index: "04", title: "Парикмахерский зал", href: "#", placeholder: "svc-ph-4" },
+  { index: "01", title: "Наращивание ресниц", href: "#", placeholder: "u-ph-1" },
+  { index: "02", title: "СПА", href: "#", placeholder: "u-ph-2" },
+  { index: "03", title: "Ногтевой сервис", href: "#", placeholder: "u-ph-3" },
+  { index: "04", title: "Парикмахерский зал", href: "#", placeholder: "u-ph-4" },
 ];
 
 export default function Services() {
@@ -24,7 +24,7 @@ export default function Services() {
         <header className="relative flex flex-col items-center py-6 text-center">
           <span
             aria-hidden="true"
-            className="svc-watermark pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 select-none whitespace-nowrap font-semibold uppercase leading-none tracking-[0.04em] text-[clamp(72px,16vw,188px)]"
+            className="u-watermark pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 select-none whitespace-nowrap font-semibold uppercase leading-none tracking-[0.04em] text-[clamp(72px,16vw,188px)]"
           >
             BEAUTY
           </span>

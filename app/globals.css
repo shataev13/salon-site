@@ -225,36 +225,45 @@
 }
 
 /* =========================================================================
-   Секция «Услуги»
+   Общие элементы секций (Услуги, Наши мастера…)
    ========================================================================= */
 
-/* Контурный водяной знак «BEAUTY»: прозрачная заливка + тонкая обводка
+/* Контурное слово-водяной знак: прозрачная заливка + тонкая обводка
    акцентом ~13%. */
-.svc-watermark {
+.u-watermark {
   color: transparent;
   -webkit-text-stroke: 1.5px color-mix(in srgb, var(--accent) 13%, transparent);
 }
 
-/* Плейсхолдеры под фото категорий (слот заменяется реальным фото).
-   Все уходят в тёмный низ — белый текст и индекс читаются. */
-.svc-ph-1 {
+/* Скрыть нативный скроллбар у горизонтальной ленты (свайп работает). */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Плейсхолдеры под фото (слот заменяется реальным снимком).
+   Все уходят в тёмный — белый текст/индекс читаются. */
+.u-ph-1 {
   background: linear-gradient(150deg, var(--accent), var(--ink-deep));
 }
-.svc-ph-2 {
+.u-ph-2 {
   background: linear-gradient(
     150deg,
     color-mix(in srgb, var(--accent-hover) 60%, var(--accent)),
     var(--ink-deep)
   );
 }
-.svc-ph-3 {
+.u-ph-3 {
   background: linear-gradient(
     150deg,
     color-mix(in srgb, var(--accent) 70%, var(--ink-deep)),
     var(--ink-deep)
   );
 }
-.svc-ph-4 {
+.u-ph-4 {
   background: linear-gradient(
     150deg,
     color-mix(in srgb, var(--accent-hover) 45%, var(--ink-deep)),
