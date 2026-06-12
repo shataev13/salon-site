@@ -89,7 +89,7 @@ export default function Team() {
   };
 
   const arrowClass =
-    "absolute top-1/2 z-10 hidden size-11 -translate-y-1/2 place-items-center rounded-full bg-background/90 text-ink-deep shadow-lg shadow-ink-deep/10 ring-1 ring-ink-deep/10 backdrop-blur transition hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-warm disabled:pointer-events-none disabled:opacity-0 sm:grid";
+    "absolute top-1/2 z-10 grid size-11 -translate-y-1/2 place-items-center rounded-full bg-background/90 text-ink-deep shadow-lg shadow-ink-deep/10 ring-1 ring-ink-deep/10 backdrop-blur transition hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-warm disabled:pointer-events-none disabled:opacity-0";
 
   return (
     <section
