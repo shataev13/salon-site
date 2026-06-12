@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { SERVICES } from "@/lib/site";
 
 export default function Services() {
@@ -32,8 +33,8 @@ export default function Services() {
         <ul className="mt-12 grid grid-cols-1 gap-[22px] min-[560px]:grid-cols-2 sm:mt-16 lg:grid-cols-4">
           {SERVICES.map((service, index) => (
             <li key={service.title}>
-              <a
-                href="#"
+              <Link
+                href={`/services/${service.slug}`}
                 aria-label={service.title}
                 className="group relative block aspect-[3/4] overflow-hidden rounded-[20px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-warm"
               >
@@ -81,7 +82,7 @@ export default function Services() {
                     </svg>
                   </span>
                 </div>
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

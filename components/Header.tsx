@@ -131,7 +131,7 @@ function ServicesDropdown() {
             {SERVICES.map((service) => (
               <li key={service.title}>
                 <Link
-                  href="#services"
+                  href={`/services/${service.slug}`}
                   role="menuitem"
                   onClick={() => setOpen(false)}
                   className="block rounded-xl px-4 py-2.5 transition-colors hover:bg-surface"
@@ -152,10 +152,19 @@ function ServicesDropdown() {
   );
 }
 
-export default function Header() {
+export default function Header({
+  variant = "overlay",
+}: {
+  /* overlay — поверх героя на главной; solid — обычная плашка на стр. услуг. */
+  variant?: "overlay" | "solid";
+}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  const positionClass =
+    variant === "overlay" ? "absolute inset-x-0 top-0" : "sticky top-0";
+  const homeHref = variant === "overlay" ? "#top" : "/";
 
   // Блокировка прокрутки, Escape и фокус для мобильного меню.
   useEffect(() => {
@@ -178,7 +187,9 @@ export default function Header() {
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <header className="absolute inset-x-0 top-0 z-40 border-b border-ink/5 bg-background shadow-[0_14px_40px_-28px_var(--brand-950)]">
+    <header
+      className={`${positionClass} z-40 border-b border-ink/5 bg-background shadow-[0_14px_40px_-28px_var(--brand-950)]`}
+    >
       {/* === Мобайл / планшет (< lg): бургер · логотип · телефон + запись === */}
       <div className="relative mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-5 sm:px-8 sm:py-6 lg:hidden">
         <button
@@ -203,7 +214,7 @@ export default function Header() {
         </button>
 
         <Link
-          href="#top"
+          href={homeHref}
           aria-label="Shati Studio — на главную"
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
         >
@@ -335,7 +346,7 @@ export default function Header() {
                 {SERVICES.map((service) => (
                   <li key={service.title}>
                     <Link
-                      href="#services"
+                      href={`/services/${service.slug}`}
                       onClick={closeMenu}
                       className="block py-2 text-base text-ink/70 transition-colors hover:text-brand-600"
                     >

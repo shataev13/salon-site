@@ -24,19 +24,21 @@ export const CONTACTS: Contact[] = [
 
 export type Service = {
   title: string;
+  /* Слаг для страницы услуги: /services/<slug>. */
+  slug: string;
   /* Короткое описание для выпадающего списка в хедере. */
   description: string;
   /* Класс-плейсхолдер фото для карточки (слот). */
   placeholder: string;
 };
 
-/* Единый источник категорий услуг — общий для блока «Услуги» (карточки)
-   и выпадающего списка «Услуги» в хедере. */
+/* Единый источник категорий услуг — общий для блока «Услуги» (карточки),
+   выпадающего списка в хедере и страниц услуг. Порядок — единый по сайту. */
 export const SERVICES: Service[] = [
-  { title: "Массаж", description: "Расслабление и уход за телом", placeholder: "u-ph-1" },
-  { title: "СПА", description: "Обёртывания и программы для тела", placeholder: "u-ph-2" },
-  { title: "Ногтевой сервис", description: "Маникюр, педикюр, покрытие", placeholder: "u-ph-3" },
-  { title: "Парикмахерский зал", description: "Стрижки и укладки", placeholder: "u-ph-4" },
+  { title: "Парикмахерский зал", slug: "hair", description: "Стрижки и укладки", placeholder: "u-ph-1" },
+  { title: "Ногтевой сервис", slug: "nails", description: "Маникюр, педикюр, покрытие", placeholder: "u-ph-2" },
+  { title: "Массаж", slug: "massage", description: "Расслабление и уход за телом", placeholder: "u-ph-3" },
+  { title: "СПА", slug: "spa", description: "Обёртывания и программы для тела", placeholder: "u-ph-4" },
 ];
 
 export type NavLink = {
@@ -49,8 +51,8 @@ export type NavLink = {
 };
 
 export const NAV_LINKS: NavLink[] = [
-  { label: "Услуги", href: "#services", hasMenu: true },
-  { label: "О салоне", href: "#about" },
-  { label: "Персонал", href: "#team" },
-  { label: "Подарочные карты", href: "#gift-cards", accent: true },
+  { label: "Услуги", href: "/#services", hasMenu: true },
+  { label: "О салоне", href: "/#about" },
+  { label: "Персонал", href: "/#team" },
+  { label: "Подарочные карты", href: "/#gift-cards", accent: true },
 ];
