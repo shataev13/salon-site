@@ -123,6 +123,28 @@
   }
 }
 
+@keyframes shati-menu-item {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes shati-accordion {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .u-reveal {
     opacity: 0;
@@ -168,6 +190,17 @@
 
   .u-panel-in {
     animation: shati-panel-in 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  /* Мобильное меню: пункты «выезжают» по очереди. */
+  .u-menu-item {
+    opacity: 0;
+    animation: shati-menu-item 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  /* Раскрытие аккордеона «Услуги» в мобильном меню. */
+  .u-accordion {
+    animation: shati-accordion 0.3s ease both;
   }
 }
 

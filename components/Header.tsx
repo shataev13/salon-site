@@ -118,7 +118,7 @@ function ServicesDropdown() {
       <div
         id={menuId}
         role="menu"
-        className={`absolute left-1/2 top-full z-50 mt-4 w-80 -translate-x-1/2 transition duration-200 ${
+        className={`absolute left-1/2 top-full z-50 w-80 -translate-x-1/2 pt-4 transition duration-200 ${
           open
             ? "visible translate-y-0 opacity-100"
             : "invisible -translate-y-1 opacity-0"
@@ -311,7 +311,8 @@ export default function Header() {
               type="button"
               aria-expanded={mobileServicesOpen}
               onClick={() => setMobileServicesOpen((v) => !v)}
-              className="flex items-center justify-between py-3 font-display text-2xl text-ink"
+              className="u-menu-item flex items-center justify-between py-3 font-display text-2xl text-ink"
+              style={{ animationDelay: "0.05s" }}
             >
               Услуги
               <svg
@@ -330,7 +331,7 @@ export default function Header() {
               </svg>
             </button>
             {mobileServicesOpen && (
-              <ul className="mb-2 flex flex-col gap-1 border-l border-brand-100 pl-4">
+              <ul className="u-accordion mb-2 flex flex-col gap-1 border-l border-brand-100 pl-4">
                 {SERVICE_CATEGORIES.map((cat) => (
                   <li key={cat.label}>
                     <Link
@@ -345,12 +346,13 @@ export default function Header() {
               </ul>
             )}
 
-            {plainLinks.map((link) => (
+            {plainLinks.map((link, i) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={closeMenu}
-                className="py-3 font-display text-2xl text-ink"
+                className="u-menu-item py-3 font-display text-2xl text-ink"
+                style={{ animationDelay: `${0.11 + i * 0.06}s` }}
               >
                 {link.label}
               </Link>
@@ -359,7 +361,8 @@ export default function Header() {
               <Link
                 href={giftCard.href}
                 onClick={closeMenu}
-                className="flex items-center gap-2 py-3 font-display text-2xl text-brand-600"
+                className="u-menu-item flex items-center gap-2 py-3 font-display text-2xl text-brand-600"
+                style={{ animationDelay: `${0.11 + plainLinks.length * 0.06}s` }}
               >
                 <Sparkle />
                 {giftCard.label}
@@ -369,7 +372,10 @@ export default function Header() {
 
           <div className="border-t border-brand-100 px-5 py-6 sm:px-8">
             {/* Контакты иконками — без текста, действие по клику. */}
-            <div className="flex items-center justify-center gap-3">
+            <div
+              className="u-menu-item flex items-center justify-center gap-3"
+              style={{ animationDelay: "0.3s" }}
+            >
               {CONTACTS.map((c) => (
                 <a
                   key={c.icon}
@@ -382,7 +388,7 @@ export default function Header() {
                 </a>
               ))}
             </div>
-            <div className="mt-5">
+            <div className="u-menu-item mt-5" style={{ animationDelay: "0.36s" }}>
               <BookingButton size="lg" className="w-full" />
             </div>
           </div>
