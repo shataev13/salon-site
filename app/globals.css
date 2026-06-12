@@ -20,6 +20,11 @@
   --color-ink: var(--ink);
   --color-surface: var(--surface);
 
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-surface-warm: var(--surface-warm);
+  --color-ink-deep: var(--ink-deep);
+
   --font-display: var(--font-playfair);
   --font-sans: var(--font-montserrat);
   --font-script: var(--font-pacifico);
@@ -217,4 +222,42 @@
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* =========================================================================
+   Секция «Услуги»
+   ========================================================================= */
+
+/* Контурный водяной знак «BEAUTY»: прозрачная заливка + тонкая обводка
+   акцентом ~13%. */
+.svc-watermark {
+  color: transparent;
+  -webkit-text-stroke: 1.5px color-mix(in srgb, var(--accent) 13%, transparent);
+}
+
+/* Плейсхолдеры под фото категорий (слот заменяется реальным фото).
+   Все уходят в тёмный низ — белый текст и индекс читаются. */
+.svc-ph-1 {
+  background: linear-gradient(150deg, var(--accent), var(--ink-deep));
+}
+.svc-ph-2 {
+  background: linear-gradient(
+    150deg,
+    color-mix(in srgb, var(--accent-hover) 60%, var(--accent)),
+    var(--ink-deep)
+  );
+}
+.svc-ph-3 {
+  background: linear-gradient(
+    150deg,
+    color-mix(in srgb, var(--accent) 70%, var(--ink-deep)),
+    var(--ink-deep)
+  );
+}
+.svc-ph-4 {
+  background: linear-gradient(
+    150deg,
+    color-mix(in srgb, var(--accent-hover) 45%, var(--ink-deep)),
+    var(--ink-deep)
+  );
 }
