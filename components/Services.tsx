@@ -29,6 +29,10 @@ export default function Services() {
             BEAUTY
           </span>
 
+          <span
+            aria-hidden="true"
+            className="relative z-10 mb-6 h-0.5 w-10 rounded-full bg-accent"
+          />
           <h2 className="relative z-10 text-4xl font-medium uppercase tracking-[0.14em] text-ink-deep sm:text-5xl">
             Услуги
           </h2>

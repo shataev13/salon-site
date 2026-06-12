@@ -23,6 +23,7 @@
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
   --color-surface-warm: var(--surface-warm);
+  --color-surface-accent: var(--surface-accent);
   --color-ink-deep: var(--ink-deep);
 
   --font-display: var(--font-playfair);

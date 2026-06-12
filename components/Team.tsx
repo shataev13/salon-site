@@ -89,12 +89,12 @@ export default function Team() {
   };
 
   const arrowClass =
-    "absolute top-1/2 z-10 grid size-11 -translate-y-1/2 place-items-center rounded-full bg-background/90 text-ink-deep shadow-lg shadow-ink-deep/10 ring-1 ring-ink-deep/10 backdrop-blur transition hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-warm disabled:pointer-events-none disabled:opacity-0";
+    "absolute top-1/2 z-10 grid size-11 -translate-y-1/2 place-items-center rounded-full bg-background/90 text-ink-deep shadow-lg shadow-ink-deep/10 ring-1 ring-ink-deep/10 backdrop-blur transition hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-accent disabled:pointer-events-none disabled:opacity-0";
 
   return (
     <section
       id="team"
-      className="relative overflow-hidden bg-surface-warm py-20 sm:py-28"
+      className="relative overflow-hidden bg-surface-accent py-20 sm:py-28"
     >
       {/* Шапка с контурным водяным знаком позади. */}
       <header className="relative mx-auto flex max-w-[1240px] flex-col items-center px-6 py-6 text-center">
@@ -105,6 +105,10 @@ export default function Team() {
           TEAM
         </span>
 
+        <span
+          aria-hidden="true"
+          className="relative z-10 mb-6 h-0.5 w-10 rounded-full bg-accent"
+        />
         <h2 className="relative z-10 text-4xl font-medium uppercase tracking-[0.14em] text-ink-deep sm:text-5xl">
           Наши мастера
         </h2>
@@ -137,7 +141,7 @@ export default function Team() {
 
         <ul
           ref={trackRef}
-          className="no-scrollbar flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-pl-6 px-6 pb-3 sm:scroll-pl-12 sm:px-12"
+          className="no-scrollbar flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-pl-6 px-6 py-4 sm:scroll-pl-12 sm:px-12"
         >
           {MASTERS.map((master, index) => (
             <li
@@ -146,7 +150,7 @@ export default function Team() {
               className="shrink-0 snap-start basis-full sm:basis-[calc((100%_-_24px)/2)] lg:basis-[calc((100%_-_72px)/4)]"
             >
               <article className="group/card text-center">
-                <div className="relative mx-auto size-36 rounded-full ring-1 ring-ink-deep/10 transition-[transform,box-shadow] duration-500 ease-out group-hover/card:-translate-y-1.5 group-hover/card:ring-2 group-hover/card:ring-accent group-hover/card:ring-offset-2 group-hover/card:ring-offset-surface-warm motion-reduce:transform-none motion-reduce:transition-none sm:size-40">
+                <div className="relative mx-auto size-36 rounded-full ring-1 ring-ink-deep/10 transition-[transform,box-shadow] duration-500 ease-out group-hover/card:-translate-y-1.5 group-hover/card:ring-2 group-hover/card:ring-accent group-hover/card:ring-offset-2 group-hover/card:ring-offset-surface-accent motion-reduce:transform-none motion-reduce:transition-none sm:size-40">
                   <div className="absolute inset-0 overflow-hidden rounded-full grayscale transition duration-500 ease-out group-hover/card:grayscale-0 motion-reduce:transition-none">
                     {master.photo ? (
                       <Image
