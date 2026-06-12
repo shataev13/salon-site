@@ -143,10 +143,10 @@ export default function Team() {
             <li
               key={master.name}
               data-card
-              className="w-52 shrink-0 snap-start sm:w-64"
+              className="shrink-0 snap-start basis-full sm:basis-[calc((100%_-_24px)/2)] lg:basis-[calc((100%_-_72px)/4)]"
             >
               <article className="group/card text-center">
-                <div className="relative mx-auto size-28 rounded-full ring-1 ring-ink-deep/10 transition-[transform,box-shadow] duration-500 ease-out group-hover/card:-translate-y-1.5 group-hover/card:ring-2 group-hover/card:ring-accent group-hover/card:ring-offset-2 group-hover/card:ring-offset-surface-warm motion-reduce:transform-none motion-reduce:transition-none sm:size-40">
+                <div className="relative mx-auto size-36 rounded-full ring-1 ring-ink-deep/10 transition-[transform,box-shadow] duration-500 ease-out group-hover/card:-translate-y-1.5 group-hover/card:ring-2 group-hover/card:ring-accent group-hover/card:ring-offset-2 group-hover/card:ring-offset-surface-warm motion-reduce:transform-none motion-reduce:transition-none sm:size-40">
                   <div className="absolute inset-0 overflow-hidden rounded-full grayscale transition duration-500 ease-out group-hover/card:grayscale-0 motion-reduce:transition-none">
                     {master.photo ? (
                       <Image
