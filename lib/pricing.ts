@@ -186,7 +186,7 @@ export type Brand = { name: string; logo?: string; width?: number; height?: numb
 
 export const BRANDS: Brand[] = [
   { name: "Thalion", logo: "/brands/thalion.png", width: 648, height: 255 },
-  { name: "Eclado", logo: "/brands/eclado.png", width: 2019, height: 779 },
+  { name: "Eclado", logo: "/brands/eclado.png", width: 719, height: 278 },
   { name: "Sothys", logo: "/brands/sothys.png", width: 300, height: 139 },
   { name: "Arosha", logo: "/brands/arosha.png", width: 1063, height: 253 },
   { name: "BeautiX", logo: "/brands/beautix.png", width: 661, height: 377 },
