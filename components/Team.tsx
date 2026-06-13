@@ -5,43 +5,19 @@ import Image from "next/image";
 
 type Master = {
   name: string;
-  specialization: string;
-  description: string;
-  /* Слот под реальное фото — заменить на путь к снимку. */
+  /* Должность. Пока общая «Мастер» — уточним позже. */
+  specialization?: string;
+  description?: string;
+  /* Фото лица: квадрат, отцентровано по лицу. */
   photo?: string;
 };
 
 const MASTERS: Master[] = [
-  {
-    name: "Анна Лебедева",
-    specialization: "Стилист-колорист",
-    description: "Сложное окрашивание и бережный уход за цветом.",
-  },
-  {
-    name: "Мария Орлова",
-    specialization: "Лэшмейкер",
-    description: "Наращивание и ламинирование ресниц.",
-  },
-  {
-    name: "Екатерина Соколова",
-    specialization: "Мастер маникюра",
-    description: "Аппаратный маникюр, укрепление и дизайн.",
-  },
-  {
-    name: "София Морозова",
-    specialization: "СПА-терапевт",
-    description: "Уходовые ритуалы и массаж лица.",
-  },
-  {
-    name: "Дарья Волкова",
-    specialization: "Парикмахер-стилист",
-    description: "Стрижки и укладки любой сложности.",
-  },
-  {
-    name: "Ольга Кузнецова",
-    specialization: "Бровист",
-    description: "Архитектура бровей и окрашивание.",
-  },
+  { name: "Анна Умярова", specialization: "Мастер", photo: "/staff/anna-umyarova.webp" },
+  { name: "Евгения Калачева", specialization: "Мастер", photo: "/staff/evgeniya-kalacheva.webp" },
+  { name: "Игорь Гурьев", specialization: "Мастер", photo: "/staff/igor-guryev.webp" },
+  { name: "Крестина Остапчук", specialization: "Мастер", photo: "/staff/kristina-ostapchuk.webp" },
+  { name: "Юрий Сапалев", specialization: "Мастер", photo: "/staff/yuriy-sapalev.webp" },
 ];
 
 function initialsOf(name: string) {
@@ -155,10 +131,10 @@ export default function Team() {
                     {master.photo ? (
                       <Image
                         src={master.photo}
-                        alt=""
+                        alt={master.name}
                         fill
-                        sizes="(max-width: 640px) 112px, 160px"
-                        className="object-cover"
+                        sizes="(max-width: 640px) 144px, 160px"
+                        className="object-cover object-center"
                       />
                     ) : (
                       <div
@@ -178,12 +154,16 @@ export default function Team() {
                 <h3 className="mt-5 text-lg font-semibold text-ink-deep">
                   {master.name}
                 </h3>
-                <p className="mt-1.5 text-[11px] font-medium uppercase tracking-[0.16em] text-accent">
-                  {master.specialization}
-                </p>
-                <p className="mx-auto mt-2 max-w-60 text-sm leading-relaxed text-ink-deep/55">
-                  {master.description}
-                </p>
+                {master.specialization && (
+                  <p className="mt-1.5 text-[11px] font-medium uppercase tracking-[0.16em] text-accent">
+                    {master.specialization}
+                  </p>
+                )}
+                {master.description && (
+                  <p className="mx-auto mt-2 max-w-60 text-sm leading-relaxed text-ink-deep/55">
+                    {master.description}
+                  </p>
+                )}
               </article>
             </li>
           ))}
