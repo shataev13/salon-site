@@ -3,69 +3,84 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
+/* Автопрокрутка слайдера и пауза после ручного переключения. */
+const AUTOPLAY_MS = 8000;
+const RESUME_AFTER_MS = 30000;
+
 type Master = {
   name: string;
   /* Должность. Пока общая «Мастер» — уточним позже. */
-  specialization?: string;
-  description?: string;
-  /* Фото лица: квадрат, отцентровано по лицу. */
-  photo?: string;
+  role?: string;
+  /* Описание мастера. Пока временный текст; задаётся индивидуально позже. */
+  bio?: string;
+  /* Портрет 3:4 (как загружали ранее). */
+  photo: string;
 };
 
 const MASTERS: Master[] = [
-  { name: "Анна Умярова", specialization: "Мастер", photo: "/staff/anna-umyarova.webp" },
-  { name: "Евгения Калачева", specialization: "Мастер", photo: "/staff/evgeniya-kalacheva.webp" },
-  { name: "Игорь Гурьев", specialization: "Мастер", photo: "/staff/igor-guryev.webp" },
-  { name: "Крестина Остапчук", specialization: "Мастер", photo: "/staff/kristina-ostapchuk.webp" },
-  { name: "Юрий Сапалев", specialization: "Мастер", photo: "/staff/yuriy-sapalev.webp" },
+  { name: "Анна Умярова", role: "Мастер", photo: "/staff/anna-umyarova.png" },
+  { name: "Евгения Калачева", role: "Мастер", photo: "/staff/evgeniya-kalacheva.png" },
+  { name: "Игорь Гурьев", role: "Мастер", photo: "/staff/igor-guryev.png" },
+  { name: "Крестина Остапчук", role: "Мастер", photo: "/staff/kristina-ostapchuk.png" },
+  { name: "Юрий Сапалев", role: "Мастер", photo: "/staff/yuriy-sapalev.png" },
 ];
 
-function initialsOf(name: string) {
-  return name
-    .split(" ")
-    .map((part) => part.charAt(0))
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
+/* Временное описание мастера, пока нет реальных текстов. */
+function bioOf(master: Master) {
+  if (master.bio) return master.bio;
+  const firstName = master.name.split(" ")[0];
+  return `Привет, меня зовут ${firstName}. Я мастер с опытом работы, внимательно отношусь к каждому клиенту и помогаю подобрать лучший уход под индивидуальные особенности.`;
 }
 
 export default function Team() {
-  const trackRef = useRef<HTMLUListElement>(null);
-  const [canLeft, setCanLeft] = useState(false);
-  const [canRight, setCanRight] = useState(false);
+  const count = MASTERS.length;
+  const [index, setIndex] = useState(0);
+  /* Автопрокрутка на паузе после действий пользователя. */
+  const [paused, setPaused] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
+  const resumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const update = useCallback(() => {
-    const el = trackRef.current;
-    if (!el) return;
-    const max = el.scrollWidth - el.clientWidth;
-    setCanLeft(el.scrollLeft > 4);
-    setCanRight(el.scrollLeft < max - 4);
+  // Уважаем prefers-reduced-motion: без автопрокрутки и плавных переходов.
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const apply = () => setReduceMotion(mq.matches);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
   }, []);
 
+  // Автопереключение каждые AUTOPLAY_MS, пока слайдер не на паузе.
   useEffect(() => {
-    const el = trackRef.current;
-    if (!el) return;
-    update();
-    el.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    return () => {
-      el.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-    };
-  }, [update]);
+    if (paused || reduceMotion || count <= 1) return;
+    const id = setInterval(
+      () => setIndex((i) => (i + 1) % count),
+      AUTOPLAY_MS,
+    );
+    return () => clearInterval(id);
+  }, [paused, reduceMotion, count]);
 
-  const scrollByCards = (direction: 1 | -1) => {
-    const el = trackRef.current;
-    if (!el) return;
-    const card = el.querySelector<HTMLElement>("[data-card]");
-    const gap = 24;
-    const pitch = card ? card.offsetWidth + gap : el.clientWidth * 0.8;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    el.scrollBy({ left: direction * pitch, behavior: reduce ? "auto" : "smooth" });
-  };
+  // Снимаем отложенное возобновление при размонтировании.
+  useEffect(
+    () => () => {
+      if (resumeTimer.current) clearTimeout(resumeTimer.current);
+    },
+    [],
+  );
+
+  // Ручное переключение: останавливаем автопрокрутку и возобновляем её
+  // только после RESUME_AFTER_MS без действий пользователя.
+  const goTo = useCallback(
+    (next: number) => {
+      setIndex(((next % count) + count) % count);
+      setPaused(true);
+      if (resumeTimer.current) clearTimeout(resumeTimer.current);
+      resumeTimer.current = setTimeout(() => setPaused(false), RESUME_AFTER_MS);
+    },
+    [count],
+  );
 
   const arrowClass =
-    "absolute top-1/2 z-10 grid size-11 -translate-y-1/2 place-items-center rounded-full bg-background/90 text-ink-deep shadow-lg shadow-ink-deep/10 ring-1 ring-ink-deep/10 backdrop-blur transition hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-accent disabled:pointer-events-none disabled:opacity-0";
+    "grid size-11 shrink-0 place-items-center rounded-full text-ink-deep/70 ring-1 ring-ink-deep/15 transition-colors hover:text-accent hover:ring-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-accent";
 
   return (
     <section
@@ -93,101 +108,121 @@ export default function Team() {
         </p>
       </header>
 
-      {/* Лента со стрелками. */}
-      <div className="relative mx-auto mt-10 max-w-[1320px] sm:mt-14">
-        <button
-          type="button"
-          aria-label="Предыдущие мастера"
-          onClick={() => scrollByCards(-1)}
-          disabled={!canLeft}
-          className={`left-3 sm:left-5 ${arrowClass}`}
-        >
-          <svg
-            viewBox="0 0 24 24"
-            className="size-5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M15 6l-6 6 6 6" />
-          </svg>
-        </button>
-
-        <ul
-          ref={trackRef}
-          className="no-scrollbar flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-pl-6 px-6 py-4 sm:scroll-pl-12 sm:px-12"
-        >
-          {MASTERS.map((master, index) => (
-            <li
-              key={master.name}
-              data-card
-              className="shrink-0 snap-start basis-full sm:basis-[calc((100%_-_24px)/2)] lg:basis-[calc((100%_-_72px)/4)]"
-            >
-              <article className="group/card text-center">
-                <div className="relative mx-auto size-36 rounded-full ring-1 ring-ink-deep/10 transition-[transform,box-shadow] duration-500 ease-out group-hover/card:-translate-y-1.5 group-hover/card:ring-2 group-hover/card:ring-accent group-hover/card:ring-offset-2 group-hover/card:ring-offset-surface-accent motion-reduce:transform-none motion-reduce:transition-none sm:size-40">
-                  <div className="absolute inset-0 overflow-hidden rounded-full grayscale transition duration-500 ease-out group-hover/card:grayscale-0 motion-reduce:transition-none">
-                    {master.photo ? (
-                      <Image
-                        src={master.photo}
-                        alt={master.name}
-                        fill
-                        sizes="(max-width: 640px) 144px, 160px"
-                        className="object-cover object-center"
-                      />
-                    ) : (
-                      <div
-                        className={`flex h-full w-full items-center justify-center u-ph-${(index % 4) + 1}`}
-                      >
-                        <span
-                          aria-hidden="true"
-                          className="text-2xl font-semibold text-white/90 sm:text-3xl"
-                        >
-                          {initialsOf(master.name)}
-                        </span>
-                      </div>
-                    )}
-                  </div>
+      {/* Слайдер: один мастер за раз. */}
+      <div
+        className="relative mx-auto mt-12 max-w-[940px] px-6 sm:mt-16"
+        aria-roledescription="карусель"
+        aria-label="Наши мастера"
+      >
+        {/* Слайды — мягкое перекрёстное затухание (без горизонтального «отката»). */}
+        <div className="relative">
+          {MASTERS.map((master, i) => {
+            const active = i === index;
+            return (
+              <article
+                key={master.name}
+                aria-hidden={!active}
+                className={`grid items-center gap-7 sm:grid-cols-[auto_1fr] sm:gap-10 lg:gap-14 motion-safe:transition-opacity motion-safe:duration-700 ${
+                  active
+                    ? "relative opacity-100"
+                    : "pointer-events-none absolute inset-0 opacity-0"
+                }`}
+              >
+                {/* Фото 3:4, компактное — блок не выглядит громоздко. */}
+                <div className="relative mx-auto aspect-[3/4] w-44 overflow-hidden rounded-2xl bg-surface ring-1 ring-ink-deep/10 sm:mx-0 sm:w-52 lg:w-60">
+                  <Image
+                    src={master.photo}
+                    alt={master.name}
+                    fill
+                    sizes="(max-width: 640px) 176px, (max-width: 1024px) 208px, 240px"
+                    className="object-cover object-top"
+                  />
                 </div>
 
-                <h3 className="mt-5 text-lg font-semibold text-ink-deep">
-                  {master.name}
-                </h3>
-                {master.specialization && (
-                  <p className="mt-1.5 text-[11px] font-medium uppercase tracking-[0.16em] text-accent">
-                    {master.specialization}
+                {/* Имя крупно фирменным шрифтом + описание. */}
+                <div className="text-center sm:text-left">
+                  {master.role && (
+                    <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-accent">
+                      {master.role}
+                    </p>
+                  )}
+                  <h3 className="mt-3 font-display text-3xl font-medium leading-tight text-ink-deep sm:text-4xl lg:text-5xl">
+                    {master.name}
+                  </h3>
+                  <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-ink-deep/65 sm:mx-0 sm:text-base">
+                    {bioOf(master)}
                   </p>
-                )}
-                {master.description && (
-                  <p className="mx-auto mt-2 max-w-60 text-sm leading-relaxed text-ink-deep/55">
-                    {master.description}
-                  </p>
-                )}
+                </div>
               </article>
-            </li>
-          ))}
-        </ul>
+            );
+          })}
+        </div>
 
-        <button
-          type="button"
-          aria-label="Следующие мастера"
-          onClick={() => scrollByCards(1)}
-          disabled={!canRight}
-          className={`right-3 sm:right-5 ${arrowClass}`}
-        >
-          <svg
-            viewBox="0 0 24 24"
-            className="size-5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+        {/* Управление под карточкой — не наезжает на текст ни на одном экране. */}
+        <div className="mt-10 flex items-center justify-center gap-6">
+          <button
+            type="button"
+            aria-label="Предыдущий мастер"
+            onClick={() => goTo(index - 1)}
+            className={arrowClass}
           >
-            <path d="M9 6l6 6-6 6" />
-          </svg>
-        </button>
+            <svg
+              viewBox="0 0 24 24"
+              className="size-5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M15 6l-6 6 6 6" />
+            </svg>
+          </button>
+
+          <ul className="flex items-center gap-1.5">
+            {MASTERS.map((master, i) => {
+              const active = i === index;
+              return (
+                <li key={master.name}>
+                  <button
+                    type="button"
+                    aria-label={`Показать: ${master.name}`}
+                    aria-current={active}
+                    onClick={() => goTo(i)}
+                    className="group grid h-6 w-6 place-items-center focus-visible:outline-none"
+                  >
+                    <span
+                      className={`block h-1.5 rounded-full transition-all duration-300 group-focus-visible:ring-2 group-focus-visible:ring-accent group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-surface-accent ${
+                        active
+                          ? "w-5 bg-accent"
+                          : "w-1.5 bg-ink-deep/25 group-hover:bg-ink-deep/45"
+                      }`}
+                    />
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+
+          <button
+            type="button"
+            aria-label="Следующий мастер"
+            onClick={() => goTo(index + 1)}
+            className={arrowClass}
+          >
+            <svg
+              viewBox="0 0 24 24"
+              className="size-5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M9 6l6 6-6 6" />
+            </svg>
+          </button>
+        </div>
       </div>
     </section>
   );
