@@ -3,10 +3,10 @@ import Logo from "./Logo";
 import {
   PHONE_DISPLAY,
   PHONE_HREF,
-  SERVICES,
   TELEGRAM_HREF,
   WHATSAPP_HREF,
 } from "@/lib/site";
+import { getServices } from "@/lib/sheet";
 
 const NAV = [
   { label: "Главная", href: "/" },
@@ -77,7 +77,8 @@ function ColumnTitle({ children }: { children: React.ReactNode }) {
 const linkClass =
   "text-sm text-white/50 transition-colors hover:text-brand-300";
 
-export default function Footer() {
+export default async function Footer() {
+  const services = await getServices();
   return (
     <footer className="bg-ink text-white">
       <div className="mx-auto max-w-[1240px] px-6 py-16 sm:py-20">
@@ -138,7 +139,7 @@ export default function Footer() {
           <nav>
             <ColumnTitle>Услуги</ColumnTitle>
             <ul className="mt-5 space-y-3">
-              {SERVICES.map((service) => (
+              {services.map((service) => (
                 <li key={service.slug}>
                   <Link href={`/services/${service.slug}`} className={linkClass}>
                     {service.title}

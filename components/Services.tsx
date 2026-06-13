@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { SERVICES } from "@/lib/site";
+import { getServices } from "@/lib/sheet";
 
-export default function Services({
+export default async function Services({
   id = "services",
   title = "Услуги",
   subtitle = "Выберите категорию",
@@ -10,6 +10,7 @@ export default function Services({
   title?: string;
   subtitle?: string;
 }) {
+  const services = await getServices();
   return (
     <section
       id={id}
@@ -39,7 +40,7 @@ export default function Services({
 
         {/* Сетка: 4 → 2 (≤1024px) → 1 (≤560px). */}
         <ul className="mt-12 grid grid-cols-1 gap-[22px] min-[560px]:grid-cols-2 sm:mt-16 lg:grid-cols-4">
-          {SERVICES.map((service, index) => (
+          {services.map((service, index) => (
             <li key={service.title}>
               <Link
                 href={`/services/${service.slug}`}

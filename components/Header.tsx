@@ -7,6 +7,7 @@ import {
   NAV_LINKS,
   SERVICES,
   type Contact,
+  type Service,
 } from "@/lib/site";
 import BookingButton from "./booking/BookingButton";
 import Logo from "./Logo";
@@ -45,7 +46,7 @@ const contactExternalProps = (c: Contact) =>
   c.external ? { target: "_blank", rel: "noopener noreferrer" } : {};
 
 /* Выпадающий список категорий для пункта «Услуги». */
-function ServicesDropdown() {
+function ServicesDropdown({ services }: { services: Service[] }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const menuId = useId();
@@ -105,7 +106,7 @@ function ServicesDropdown() {
           {/* Эхо «светового штриха» — тонкая фирменная линия. */}
           <div className="h-px w-full bg-gradient-to-r from-transparent via-brand-400 to-transparent" />
           <ul className="p-2">
-            {SERVICES.map((service) => (
+            {services.map((service) => (
               <li key={service.title}>
                 <Link
                   href={`/services/${service.slug}`}
@@ -131,9 +132,12 @@ function ServicesDropdown() {
 
 export default function Header({
   variant = "overlay",
+  services = SERVICES,
 }: {
   /* overlay — поверх героя на главной; solid — обычная плашка на стр. услуг. */
   variant?: "overlay" | "solid";
+  /* Список услуг (для дропдауна и меню). По умолчанию — из кода. */
+  services?: Service[];
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
@@ -247,7 +251,7 @@ export default function Header({
 
         {/* Ярус 2: навигация по центру */}
         <nav className="mx-auto flex max-w-7xl items-center justify-center gap-9 px-8 py-3.5">
-          <ServicesDropdown />
+          <ServicesDropdown services={services} />
           {plainLinks.map((link) => (
             <Link key={link.href} href={link.href} className={navTierClass}>
               {link.label}
@@ -321,7 +325,7 @@ export default function Header({
             </button>
             {mobileServicesOpen && (
               <ul className="u-accordion mb-2 flex flex-col gap-1 border-l border-brand-100 pl-4">
-                {SERVICES.map((service) => (
+                {services.map((service) => (
                   <li key={service.title}>
                     <Link
                       href={`/services/${service.slug}`}

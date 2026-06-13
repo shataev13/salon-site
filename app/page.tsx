@@ -4,12 +4,14 @@ import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import Team from "@/components/Team";
 import Materials from "@/components/Materials";
+import { getServices } from "@/lib/sheet";
 
-export default function Home() {
+export default async function Home() {
+  const services = await getServices();
   return (
     <BookingProvider>
       <div className="relative">
-        <Header />
+        <Header services={services} />
         <Hero />
       </div>
       <Services />

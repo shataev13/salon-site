@@ -6,18 +6,19 @@ import ContactIcons from "@/components/ContactIcons";
 import Header from "@/components/Header";
 import Services from "@/components/Services";
 import ServicePricing from "@/components/ServicePricing";
-import { SERVICES } from "@/lib/site";
-import { PRICE_CATEGORIES } from "@/lib/pricing";
+import { getPriceCategories, getServices } from "@/lib/sheet";
 
 type Params = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return SERVICES.map((service) => ({ slug: service.slug }));
+export async function generateStaticParams() {
+  const services = await getServices();
+  return services.map((service) => ({ slug: service.slug }));
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
-  const service = SERVICES.find((s) => s.slug === slug);
+  const services = await getServices();
+  const service = services.find((s) => s.slug === slug);
   return {
     title: service ? `${service.title} — Shati Studio` : "Shati Studio",
   };
@@ -25,17 +26,19 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
 export default async function ServicePage({ params }: Params) {
   const { slug } = await params;
-  const index = SERVICES.findIndex((s) => s.slug === slug);
-  const service = SERVICES[index];
+  const services = await getServices();
+  const index = services.findIndex((s) => s.slug === slug);
+  const service = services[index];
   if (!service) notFound();
 
   const num = String(index + 1).padStart(2, "0");
-  const category = PRICE_CATEGORIES.find((c) => c.id === service.slug);
+  const categories = await getPriceCategories();
+  const category = categories.find((c) => c.id === service.slug);
   const description = category?.intro ?? service.description;
 
   return (
     <BookingProvider>
-      <Header variant="solid" />
+      <Header variant="solid" services={services} />
       <main>
         {/* Первый экран: фото-панель + текст + запись + контакты. */}
         <section className="mx-auto grid max-w-[1240px] items-center gap-10 bg-surface-warm px-6 py-16 sm:py-20 md:grid-cols-2 md:gap-14 lg:gap-20">
