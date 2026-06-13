@@ -185,11 +185,10 @@ export const PRICE_CATEGORIES: PriceCategory[] = [
 export type Brand = { name: string; logo?: string; width?: number; height?: number };
 
 export const BRANDS: Brand[] = [
+  { name: "Thalion", logo: "/brands/thalion.png", width: 648, height: 255 },
   { name: "Eclado", logo: "/brands/eclado.png", width: 2019, height: 779 },
   { name: "Sothys", logo: "/brands/sothys.png", width: 300, height: 139 },
   { name: "Arosha", logo: "/brands/arosha.png", width: 1063, height: 253 },
   { name: "BeautiX", logo: "/brands/beautix.png", width: 661, height: 377 },
   { name: "Lebel", logo: "/brands/lebel.png", width: 2000, height: 609 },
-  // Логотип не загружен — пока выводится текстом.
-  { name: "Thalion" },
 ];

@@ -30,7 +30,7 @@ export default function Materials() {
                   alt={brand.name}
                   width={brand.width ?? 160}
                   height={brand.height ?? 64}
-                  className="h-12 w-auto object-contain opacity-60 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
+                  className="h-12 w-auto object-contain opacity-60 brightness-0 transition duration-300 hover:opacity-100 hover:brightness-100"
                 />
               ) : (
                 /* Слот под реальный логотип — пока название текстом. */
