@@ -1,0 +1,81 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { BookingProvider } from "@/components/booking/BookingProvider";
+import BookingButton from "@/components/booking/BookingButton";
+import ContactIcons from "@/components/ContactIcons";
+import Header from "@/components/Header";
+import Services from "@/components/Services";
+import ServicePricing from "@/components/ServicePricing";
+import { getPriceCategories, getServices } from "@/lib/sheet";
+
+type Params = { params: Promise<{ slug: string }> };
+
+export async function generateStaticParams() {
+  const services = await getServices();
+  return services.map((service) => ({ slug: service.slug }));
+}
+
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const { slug } = await params;
+  const services = await getServices();
+  const service = services.find((s) => s.slug === slug);
+  return {
+    title: service ? `${service.title} — Shati Studio` : "Shati Studio",
+  };
+}
+
+export default async function ServicePage({ params }: Params) {
+  const { slug } = await params;
+  const services = await getServices();
+  const index = services.findIndex((s) => s.slug === slug);
+  const service = services[index];
+  if (!service) notFound();
+
+  const num = String(index + 1).padStart(2, "0");
+  const categories = await getPriceCategories();
+  const category = categories.find((c) => c.id === service.slug);
+  const description = category?.intro ?? service.description;
+
+  return (
+    <BookingProvider>
+      <Header variant="solid" services={services} />
+      <main>
+        {/* Первый экран: фото-панель + текст + запись + контакты. */}
+        <section className="mx-auto grid max-w-[1240px] items-center gap-10 bg-surface-warm px-6 py-16 sm:py-20 md:grid-cols-2 md:gap-14 lg:gap-20">
+          <div
+            className={`aspect-[3/4] w-full overflow-hidden rounded-[20px] ${service.placeholder}`}
+          >
+            {/* Слот под реальное фото услуги:
+                <Image src="..." alt="" fill className="object-cover" /> */}
+          </div>
+
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+              {num} — Услуга
+            </p>
+            <span
+              aria-hidden="true"
+              className="mt-5 block h-0.5 w-10 rounded-full bg-accent"
+            />
+            <h1 className="mt-7 text-4xl font-medium uppercase tracking-[0.12em] text-ink-deep sm:text-5xl lg:text-6xl">
+              {service.title}
+            </h1>
+            <p className="mt-6 max-w-md leading-relaxed text-ink-deep/65 sm:text-lg">
+              {description}
+            </p>
+            <div className="mt-9">
+              <BookingButton size="lg" />
+            </div>
+            <ContactIcons className="mt-8" />
+          </div>
+        </section>
+
+        {/* Стоимость именно этой услуги. */}
+        {category && <ServicePricing category={category} />}
+
+        {/* Другие услуги — наш блок карточек. */}
+        <Services id="other-services" title="Другие услуги" subtitle="Выберите услугу" />
+      </main>
+    </BookingProvider>
+  );
+}
