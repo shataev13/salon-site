@@ -28,7 +28,7 @@ export default async function GiftCardsPage() {
     <BookingProvider>
       <Header variant="solid" services={services} />
       <main>
-        <section className="bg-surface py-16 sm:py-24">
+        <section className="bg-background py-16 sm:py-24">
           <div className="mx-auto max-w-[1240px] px-6">
             {/* Заголовок + описание. */}
             <header className="mx-auto max-w-2xl text-center">
@@ -46,24 +46,29 @@ export default async function GiftCardsPage() {
               </p>
             </header>
 
-            {/* Сетка номиналов: 1 → 2 → 3 колонки. Каждая — карточка с тенью. */}
-            <ul className="mt-14 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-3">
+            {/* Сетка номиналов: 1 → 2 → 3 колонки. Без подложки — у самой
+                карты мягкая тень, чтобы она «лежала» над фоном. */}
+            <ul className="mt-14 grid grid-cols-1 gap-x-8 gap-y-14 sm:mt-20 sm:grid-cols-2 lg:grid-cols-3">
               {DENOMINATIONS.map((denom) => (
-                <li key={denom} className="flex">
-                  <div className="group mx-auto flex w-full max-w-sm flex-col items-center rounded-3xl bg-background p-7 text-center shadow-[0_18px_44px_-24px_var(--brand-900)] ring-1 ring-ink-deep/5 transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-22px_var(--brand-900)] sm:p-8">
-                    <Image
-                      src="/gift_card_no_background.png"
-                      alt={`Подарочный сертификат Shati Studio на ${denom}`}
-                      width={2048}
-                      height={1528}
-                      sizes="(max-width: 640px) 78vw, (max-width: 1024px) 40vw, 340px"
-                      className="h-auto w-full drop-shadow-[0_12px_26px_-16px_var(--brand-900)] transition-transform duration-300 group-hover:scale-[1.03]"
-                    />
-                    <p className="mt-6 text-xl font-medium text-ink-deep">
-                      {denom}
-                    </p>
-                    <BookingButton label="Купить" className="mt-5 w-full" />
-                  </div>
+                <li
+                  key={denom}
+                  className="flex flex-col items-center text-center"
+                >
+                  <Image
+                    src="/gift_card_no_background.png"
+                    alt={`Подарочный сертификат Shati Studio на ${denom}`}
+                    width={2048}
+                    height={1528}
+                    sizes="(max-width: 640px) 86vw, (max-width: 1024px) 44vw, 360px"
+                    className="h-auto w-full max-w-sm drop-shadow-[0_22px_45px_-22px_var(--brand-900)]"
+                  />
+                  <p className="mt-6 text-xl font-medium text-ink-deep">
+                    {denom}
+                  </p>
+                  <BookingButton
+                    label="Купить"
+                    className="mt-5 w-full max-w-xs"
+                  />
                 </li>
               ))}
             </ul>
