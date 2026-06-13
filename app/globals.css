@@ -273,35 +273,3 @@
     var(--ink-deep)
   );
 }
-
-/* =========================================================================
-   Подарочная карта — лёгкий 3D-наклон за курсором + мягкий блик.
-   Углы наклона и позиция блика приходят из JS через CSS-переменные.
-   При reduced-motion переходы выше уже сведены к 0, а наклон отключается
-   в самом компоненте (interactive=false) — карта остаётся статичной.
-   ========================================================================= */
-.gift-tilt {
-  transform: rotateX(var(--gx, 0deg)) rotateY(var(--gy, 0deg));
-  transition: transform var(--gdur, 0.55s) ease-out;
-  transform-origin: center;
-  will-change: transform;
-}
-
-/* Блик ограничен формой карты через маску по альфе самого PNG. */
-.gift-glare {
-  opacity: var(--gop, 0);
-  transition: opacity var(--gdur, 0.55s) ease-out;
-  background: radial-gradient(
-    circle at var(--gmx, 50%) var(--gmy, 50%),
-    rgba(255, 255, 255, 0.4),
-    rgba(255, 255, 255, 0) 45%
-  );
-  -webkit-mask-image: url("/gift_card_no_background.png");
-  mask-image: url("/gift_card_no_background.png");
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-}
