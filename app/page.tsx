@@ -2,6 +2,7 @@ import { BookingProvider } from "@/components/booking/BookingProvider";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
+import GiftCard from "@/components/GiftCard";
 import Team from "@/components/Team";
 import Materials from "@/components/Materials";
 import { getServices } from "@/lib/sheet";
@@ -15,6 +16,7 @@ export default async function Home() {
         <Hero />
       </div>
       <Services />
+      <GiftCard />
       <Team />
       <Materials />
     </BookingProvider>
