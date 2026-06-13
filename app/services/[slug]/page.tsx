@@ -4,6 +4,8 @@ import { BookingProvider } from "@/components/booking/BookingProvider";
 import BookingButton from "@/components/booking/BookingButton";
 import ContactIcons from "@/components/ContactIcons";
 import Header from "@/components/Header";
+import Services from "@/components/Services";
+import ServicePricing from "@/components/ServicePricing";
 import { SERVICES } from "@/lib/site";
 import { PRICE_CATEGORIES } from "@/lib/pricing";
 
@@ -28,17 +30,15 @@ export default async function ServicePage({ params }: Params) {
   if (!service) notFound();
 
   const num = String(index + 1).padStart(2, "0");
-  // Описание берём из нашего же контента раздела «Стоимость».
-  const description =
-    PRICE_CATEGORIES.find((c) => c.id === service.slug)?.intro ??
-    service.description;
+  const category = PRICE_CATEGORIES.find((c) => c.id === service.slug);
+  const description = category?.intro ?? service.description;
 
   return (
     <BookingProvider>
       <Header variant="solid" />
-      <main className="bg-surface-warm">
-        <section className="mx-auto grid max-w-[1240px] items-center gap-10 px-6 py-16 sm:py-20 md:grid-cols-2 md:gap-14 lg:gap-20">
-          {/* Слева: фото-панель (наше скругление карточек, слот под фото). */}
+      <main>
+        {/* Первый экран: фото-панель + текст + запись + контакты. */}
+        <section className="mx-auto grid max-w-[1240px] items-center gap-10 bg-surface-warm px-6 py-16 sm:py-20 md:grid-cols-2 md:gap-14 lg:gap-20">
           <div
             className={`aspect-[3/4] w-full overflow-hidden rounded-[20px] ${service.placeholder}`}
           >
@@ -46,7 +46,6 @@ export default async function ServicePage({ params }: Params) {
                 <Image src="..." alt="" fill className="object-cover" /> */}
           </div>
 
-          {/* Справа: индекс, заголовок, описание, запись, контакты. */}
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
               {num} — Услуга
@@ -67,6 +66,12 @@ export default async function ServicePage({ params }: Params) {
             <ContactIcons className="mt-8" />
           </div>
         </section>
+
+        {/* Стоимость именно этой услуги. */}
+        {category && <ServicePricing category={category} />}
+
+        {/* Другие услуги — наш блок карточек. */}
+        <Services id="other-services" title="Другие услуги" subtitle="Выберите услугу" />
       </main>
     </BookingProvider>
   );

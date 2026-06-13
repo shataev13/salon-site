@@ -3,7 +3,6 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import Team from "@/components/Team";
-import Pricing from "@/components/Pricing";
 import Materials from "@/components/Materials";
 
 export default function Home() {
@@ -15,7 +14,6 @@ export default function Home() {
       </div>
       <Services />
       <Team />
-      <Pricing />
       <Materials />
     </BookingProvider>
   );

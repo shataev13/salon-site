@@ -1,10 +1,18 @@
 import Link from "next/link";
 import { SERVICES } from "@/lib/site";
 
-export default function Services() {
+export default function Services({
+  id = "services",
+  title = "Услуги",
+  subtitle = "Выберите категорию",
+}: {
+  id?: string;
+  title?: string;
+  subtitle?: string;
+}) {
   return (
     <section
-      id="services"
+      id={id}
       className="relative overflow-hidden bg-surface-warm py-20 sm:py-28"
     >
       <div className="mx-auto max-w-[1240px] px-6">
@@ -22,10 +30,10 @@ export default function Services() {
             className="relative z-10 mb-6 h-0.5 w-10 rounded-full bg-accent"
           />
           <h2 className="relative z-10 text-4xl font-medium uppercase tracking-[0.14em] text-ink-deep sm:text-5xl">
-            Услуги
+            {title}
           </h2>
           <p className="relative z-10 mt-4 text-sm tracking-wide text-ink-deep/50">
-            Выберите категорию
+            {subtitle}
           </p>
         </header>
 

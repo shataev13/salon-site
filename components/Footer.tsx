@@ -12,7 +12,6 @@ const NAV = [
   { label: "Главная", href: "/" },
   { label: "Услуги", href: "/#services" },
   { label: "Наши мастера", href: "/#team" },
-  { label: "Стоимость", href: "/#pricing" },
   { label: "Материалы", href: "/#materials" },
   { label: "Подарочные карты", href: "/#gift-cards" },
 ];
