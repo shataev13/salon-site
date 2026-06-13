@@ -13,7 +13,7 @@ const NAV = [
   { label: "Услуги", href: "/#services" },
   { label: "Наши мастера", href: "/#team" },
   { label: "Материалы", href: "/#materials" },
-  { label: "Подарочные карты", href: "/#gift-cards" },
+  { label: "Подарочный сертификат", href: "/gift-cards" },
 ];
 
 const LEGAL = [

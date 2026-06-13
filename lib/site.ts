@@ -54,5 +54,5 @@ export const NAV_LINKS: NavLink[] = [
   { label: "Услуги", href: "/#services", hasMenu: true },
   { label: "О салоне", href: "/#about" },
   { label: "Персонал", href: "/#team" },
-  { label: "Подарочные карты", href: "/#gift-cards", accent: true },
+  { label: "Подарочный сертификат", href: "/gift-cards", accent: true },
 ];
