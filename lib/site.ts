@@ -37,8 +37,8 @@ export type Service = {
 export const SERVICES: Service[] = [
   { title: "Парикмахерский зал", slug: "hair", description: "Стрижки и укладки", placeholder: "u-ph-1" },
   { title: "Ногтевой сервис", slug: "nails", description: "Маникюр, педикюр, покрытие", placeholder: "u-ph-2" },
-  { title: "Массаж", slug: "massage", description: "Расслабление и уход за телом", placeholder: "u-ph-3" },
-  { title: "СПА", slug: "spa", description: "Обёртывания и программы для тела", placeholder: "u-ph-4" },
+  { title: "Косметология", slug: "cosmetology", description: "Уход за лицом и аппаратные процедуры", placeholder: "u-ph-3" },
+  { title: "Массаж / СПА", slug: "massage-spa", description: "Массаж, обёртывания и программы для тела", placeholder: "u-ph-4" },
 ];
 
 export type NavLink = {
