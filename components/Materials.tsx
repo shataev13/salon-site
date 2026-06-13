@@ -28,8 +28,8 @@ export default function Materials() {
                 <Image
                   src={brand.logo}
                   alt={brand.name}
-                  width={160}
-                  height={64}
+                  width={brand.width ?? 160}
+                  height={brand.height ?? 64}
                   className="h-12 w-auto object-contain opacity-60 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
                 />
               ) : (
