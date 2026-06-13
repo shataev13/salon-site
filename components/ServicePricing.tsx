@@ -37,12 +37,19 @@ export default function ServicePricing({
 }) {
   const [location, setLocation] = useState(0);
   const titledGroups = category.groups.filter((g) => g.title);
-  const [open, setOpen] = useState<string | null>(
-    titledGroups[0]?.title ?? null,
+  // Несколько разделов могут быть открыты одновременно и не закрывают
+  // друг друга — обычный независимый аккордеон. По умолчанию открыт первый.
+  const [openGroups, setOpenGroups] = useState<Set<string>>(
+    () => new Set(titledGroups[0]?.title ? [titledGroups[0].title] : []),
   );
 
   const toggle = (title: string) =>
-    setOpen((cur) => (cur === title ? null : title));
+    setOpenGroups((cur) => {
+      const next = new Set(cur);
+      if (next.has(title)) next.delete(title);
+      else next.add(title);
+      return next;
+    });
 
   return (
     <section className="relative overflow-hidden bg-background py-20 sm:py-28">
@@ -96,7 +103,7 @@ export default function ServicePricing({
             // Группы услуги — аккордеонами.
             category.groups.map((group, index) => {
               const heading = group.title ?? `Группа ${index + 1}`;
-              const isOpen = open === heading;
+              const isOpen = openGroups.has(heading);
               return (
                 <div
                   key={heading}
@@ -128,11 +135,22 @@ export default function ServicePricing({
                       </svg>
                     </button>
                   </h3>
-                  {isOpen && (
-                    <div className="u-accordion pb-8">
-                      <PriceRows items={group.items} />
+                  {/* Плавное раскрытие по высоте: grid-template-rows 0fr→1fr.
+                      Содержимое всегда смонтировано, поэтому анимация идёт
+                      в обе стороны без рывка. */}
+                  <div
+                    className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${
+                      isOpen
+                        ? "grid-rows-[1fr] opacity-100"
+                        : "grid-rows-[0fr] opacity-0"
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <div className="pb-8">
+                        <PriceRows items={group.items} />
+                      </div>
                     </div>
-                  )}
+                  </div>
                 </div>
               );
             })

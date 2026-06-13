@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { type MouseEvent, useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import {
   CONTACTS,
@@ -168,6 +168,30 @@ export default function Header({
 
   const closeMenu = () => setMenuOpen(false);
 
+  // Плавный скролл к секции на текущей странице, без перезагрузки.
+  // Если секции на странице нет (мы на другой странице или якорь-заглушка) —
+  // не вмешиваемся: <Link> выполнит обычный переход на /#…
+  const handleHashNav = (
+    event: MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    if (!href.startsWith("/#")) return;
+    const id = href.slice(2);
+    const el = id ? document.getElementById(id) : null;
+    if (!el) return;
+    event.preventDefault();
+    // Закрываем мобильное меню и снимаем блокировку прокрутки —
+    // иначе scrollIntoView не сможет прокрутить страницу.
+    if (menuOpen) {
+      setMenuOpen(false);
+      document.body.style.removeProperty("overflow");
+    }
+    // Ждём кадр, чтобы оверлей меню исчез из DOM. behavior по умолчанию
+    // следует CSS scroll-behavior (smooth / auto при prefers-reduced-motion).
+    requestAnimationFrame(() => el.scrollIntoView({ block: "start" }));
+    window.history.replaceState(null, "", href);
+  };
+
   return (
     <header
       className={`${positionClass} z-40 border-b border-ink/5 bg-background shadow-[0_14px_40px_-28px_var(--brand-950)]`}
@@ -253,12 +277,21 @@ export default function Header({
         <nav className="mx-auto flex max-w-7xl items-center justify-center gap-9 px-8 py-3.5">
           <ServicesDropdown services={services} />
           {plainLinks.map((link) => (
-            <Link key={link.href} href={link.href} className={navTierClass}>
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={(e) => handleHashNav(e, link.href)}
+              className={navTierClass}
+            >
               {link.label}
             </Link>
           ))}
           {giftCard && (
-            <Link href={giftCard.href} className={giftTierClass}>
+            <Link
+              href={giftCard.href}
+              onClick={(e) => handleHashNav(e, giftCard.href)}
+              className={giftTierClass}
+            >
               <Sparkle />
               {giftCard.label}
             </Link>
@@ -343,7 +376,10 @@ export default function Header({
               <Link
                 key={link.href}
                 href={link.href}
-                onClick={closeMenu}
+                onClick={(e) => {
+                  handleHashNav(e, link.href);
+                  closeMenu();
+                }}
                 className="u-menu-item py-3 font-display text-2xl text-ink"
                 style={{ animationDelay: `${0.11 + i * 0.06}s` }}
               >
@@ -353,7 +389,10 @@ export default function Header({
             {giftCard && (
               <Link
                 href={giftCard.href}
-                onClick={closeMenu}
+                onClick={(e) => {
+                  handleHashNav(e, giftCard.href);
+                  closeMenu();
+                }}
                 className="u-menu-item flex items-center gap-2 py-3 font-display text-2xl text-brand-600"
                 style={{ animationDelay: `${0.11 + plainLinks.length * 0.06}s` }}
               >

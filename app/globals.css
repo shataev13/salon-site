@@ -35,6 +35,8 @@
   html {
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
+    /* Плавный скролл к якорям; при reduced-motion ниже принудительно auto. */
+    scroll-behavior: smooth;
   }
 
   body {
