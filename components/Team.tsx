@@ -110,7 +110,7 @@ export default function Team() {
 
       {/* Слайдер: один мастер за раз. */}
       <div
-        className="relative mx-auto mt-12 max-w-[940px] px-6 sm:mt-16"
+        className="relative mx-auto mt-12 max-w-[1080px] px-6 sm:mt-16"
         aria-roledescription="карусель"
         aria-label="Наши мастера"
       >
@@ -129,12 +129,12 @@ export default function Team() {
                 }`}
               >
                 {/* Фото 3:4, компактное — блок не выглядит громоздко. */}
-                <div className="relative mx-auto aspect-[3/4] w-52 overflow-hidden rounded-2xl bg-surface ring-1 ring-ink-deep/10 sm:mx-0 sm:w-64 lg:w-72">
+                <div className="relative mx-auto aspect-[3/4] w-56 overflow-hidden rounded-2xl bg-surface ring-1 ring-ink-deep/10 sm:mx-0 sm:w-72 lg:w-[400px]">
                   <Image
                     src={master.photo}
                     alt={master.name}
                     fill
-                    sizes="(max-width: 640px) 208px, (max-width: 1024px) 256px, 288px"
+                    sizes="(max-width: 640px) 224px, (max-width: 1024px) 288px, 400px"
                     className="object-cover object-top"
                   />
                 </div>
