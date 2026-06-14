@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getServices } from "@/lib/sheet";
 
 export default async function Services({
@@ -47,10 +48,20 @@ export default async function Services({
                 aria-label={service.title}
                 className="group relative block aspect-[3/4] overflow-hidden rounded-[20px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-warm"
               >
-                {/* Слот под фото: лёгкий zoom на hover. */}
-                <div
-                  className={`absolute inset-0 ${service.placeholder} transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.045]`}
-                />
+                {/* Фото услуги: лёгкий zoom на hover (фолбэк — градиент). */}
+                {service.photo ? (
+                  <Image
+                    src={service.photo}
+                    alt={service.title}
+                    fill
+                    sizes="(max-width: 560px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    className="object-cover transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.045]"
+                  />
+                ) : (
+                  <div
+                    className={`absolute inset-0 ${service.placeholder} transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.045]`}
+                  />
+                )}
                 {/* Затемнение снизу под текст. */}
                 <div className="absolute inset-0 bg-gradient-to-t from-ink-deep/85 via-ink-deep/25 to-transparent" />
 

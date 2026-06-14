@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { BookingProvider } from "@/components/booking/BookingProvider";
 import BookingButton from "@/components/booking/BookingButton";
@@ -43,10 +44,18 @@ export default async function ServicePage({ params }: Params) {
         {/* Первый экран: фото-панель + текст + запись + контакты. */}
         <section className="mx-auto grid max-w-[1240px] items-center gap-10 bg-surface-warm px-6 py-16 sm:py-20 md:grid-cols-2 md:gap-14 lg:gap-20">
           <div
-            className={`aspect-[3/4] w-full overflow-hidden rounded-[20px] ${service.placeholder}`}
+            className={`relative aspect-[3/4] w-full overflow-hidden rounded-[20px] ${service.photo ? "bg-surface" : service.placeholder}`}
           >
-            {/* Слот под реальное фото услуги:
-                <Image src="..." alt="" fill className="object-cover" /> */}
+            {service.photo && (
+              <Image
+                src={service.photo}
+                alt={service.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 600px"
+                className="object-cover"
+                preload
+              />
+            )}
           </div>
 
           <div>
