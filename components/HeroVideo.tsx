@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 
-/* Фоновое видео героя. Слот под реальный ролик — пока его нет, элемент
-   прозрачен и сквозь него виден градиентный фолбэк. Уважает reduced-motion. */
+/* Фоновое видео героя (1080p, без звука, ~2.5 МБ). Показывает постер сразу,
+   пока грузится ролик; при reduced-motion остаётся статичный постер. */
 export default function HeroVideo() {
   const ref = useRef<HTMLVideoElement>(null);
   const [autoplay, setAutoplay] = useState(true);
@@ -32,6 +32,7 @@ export default function HeroVideo() {
       loop
       playsInline
       preload="metadata"
+      poster="/hero-poster.jpg"
       aria-hidden="true"
       tabIndex={-1}
     >
