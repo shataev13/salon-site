@@ -131,6 +131,15 @@
   }
 }
 
+@keyframes shati-drawer-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
 @keyframes shati-menu-item {
   from {
     opacity: 0;
@@ -198,6 +207,11 @@
 
   .u-panel-in {
     animation: shati-panel-in 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  /* Боковая панель (онлайн-запись) — выезжает справа. */
+  .u-drawer-in {
+    animation: shati-drawer-in 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   /* Мобильное меню: пункты «выезжают» по очереди. */
