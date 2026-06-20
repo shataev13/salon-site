@@ -48,7 +48,7 @@ export type Service = {
 /* Единый источник категорий услуг — общий для блока «Услуги» (карточки),
    выпадающего списка в хедере и страниц услуг. Порядок — единый по сайту. */
 export const SERVICES: Service[] = [
-  { title: "Парикмахерский зал", slug: "hair", description: "Стрижки и укладки", placeholder: "u-ph-1", photo: "/services/hair.png" },
+  { title: "Парикмахерский зал", slug: "hair", description: "Стрижки и укладки", placeholder: "u-ph-1", photo: "/services/hair.webp" },
   { title: "Ногтевой сервис", slug: "nails", description: "Маникюр, педикюр, покрытие", placeholder: "u-ph-2", photo: "/services/nails.jpg" },
   { title: "Косметология", slug: "cosmetology", description: "Уход за лицом и аппаратные процедуры", placeholder: "u-ph-3", photo: "/services/cosmetology.jpg" },
   { title: "Массаж / СПА", slug: "massage-spa", description: "Массаж, обёртывания и программы для тела", placeholder: "u-ph-4", photo: "/services/massage-spa.jpg" },

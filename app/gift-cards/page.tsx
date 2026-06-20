@@ -69,7 +69,7 @@ export default async function GiftCardsPage() {
                   className="flex flex-col items-center text-center"
                 >
                   <Image
-                    src="/gift_card_no_background.png"
+                    src="/gift_card_no_background.webp"
                     alt={`Подарочный сертификат Shati Studio на ${denom}`}
                     width={2048}
                     height={1528}

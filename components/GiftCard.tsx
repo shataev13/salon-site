@@ -75,7 +75,7 @@ export default function GiftCard() {
             className="gift-tilt w-full max-w-md"
           >
             <Image
-              src="/gift_card_no_background.png"
+              src="/gift_card_no_background.webp"
               alt="Подарочный сертификат Shati Studio"
               width={2048}
               height={1528}
