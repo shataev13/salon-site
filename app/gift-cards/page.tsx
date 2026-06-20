@@ -3,6 +3,7 @@ import Image from "next/image";
 import { BookingProvider } from "@/components/booking/BookingProvider";
 import BookingButton from "@/components/booking/BookingButton";
 import Header from "@/components/Header";
+import { GIFT_CERTIFICATE_URL } from "@/lib/site";
 import { getServices } from "@/lib/sheet";
 
 export const metadata: Metadata = {
@@ -67,6 +68,7 @@ export default async function GiftCardsPage() {
                   </p>
                   <BookingButton
                     label="Купить"
+                    href={GIFT_CERTIFICATE_URL}
                     className="mt-5 w-full max-w-xs"
                   />
                 </li>

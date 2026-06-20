@@ -49,6 +49,20 @@ export default function BookingButton({
   const pillClass = `inline-flex items-center justify-center gap-2 rounded-full font-medium tracking-wide ${baseClass} ${sizeClasses[size]} ${className}`;
 
   if (href) {
+    // Внешние ссылки (http/https) открываем в новой вкладке.
+    if (/^https?:\/\//.test(href)) {
+      return (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={pillClass}
+        >
+          {label}
+          {arrow}
+        </a>
+      );
+    }
     return (
       <Link href={href} className={pillClass}>
         {label}

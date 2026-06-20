@@ -7,6 +7,17 @@ export const WHATSAPP_HREF = "https://wa.me/74992482225";
 // TODO: заменить на реальный @username студии в Telegram.
 export const TELEGRAM_HREF = "https://t.me/shatistudio";
 
+/* Онлайн-запись YClients. Вставьте ссылку на онлайн-запись из админки
+   YClients (раздел «Онлайн-запись → Виджет / Ссылка»). Пока пусто — в окне
+   записи показывается заглушка с телефоном. Можно задать и переменной
+   окружения NEXT_PUBLIC_BOOKING_URL (она имеет приоритет). */
+export const BOOKING_URL =
+  process.env.NEXT_PUBLIC_BOOKING_URL?.trim() || "";
+
+/* Покупка подарочного сертификата (YClients). */
+export const GIFT_CERTIFICATE_URL =
+  "https://yclients.com/group_loyalty_certificate_types/2001057";
+
 export type Contact = {
   label: string;
   href: string;
