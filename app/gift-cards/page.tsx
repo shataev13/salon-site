@@ -3,7 +3,7 @@ import Image from "next/image";
 import { BookingProvider } from "@/components/booking/BookingProvider";
 import BookingButton from "@/components/booking/BookingButton";
 import Header from "@/components/Header";
-import { GIFT_CERTIFICATE_URL } from "@/lib/site";
+import { GIFT_CERTIFICATE_URL, PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
 import { getServices } from "@/lib/sheet";
 
 export const metadata: Metadata = {
@@ -45,6 +45,19 @@ export default async function GiftCardsPage() {
                 номинал и оформите подарочный сертификат на услуги Shati Studio —
                 себе или в подарок.
               </p>
+              {!GIFT_CERTIFICATE_URL && (
+                <p className="mx-auto mt-5 max-w-md rounded-full bg-surface px-5 py-2.5 text-sm text-ink-deep/70">
+                  Онлайн-оплата сертификатов скоро. Пока оформить можно по
+                  телефону{" "}
+                  <a
+                    href={PHONE_HREF}
+                    className="font-medium text-brand-600 underline-offset-4 hover:underline"
+                  >
+                    {PHONE_DISPLAY}
+                  </a>
+                  .
+                </p>
+              )}
             </header>
 
             {/* Сетка номиналов: 1 → 2 → 3 колонки. Без подложки — у самой
@@ -68,7 +81,7 @@ export default async function GiftCardsPage() {
                   </p>
                   <BookingButton
                     label="Купить"
-                    href={GIFT_CERTIFICATE_URL}
+                    href={GIFT_CERTIFICATE_URL || PHONE_HREF}
                     className="mt-5 w-full max-w-xs"
                   />
                 </li>

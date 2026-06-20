@@ -138,13 +138,26 @@ export default function BookingModal({
 
         {BOOKING_URL ? (
           /* Виджет онлайн-записи YClients. */
-          <div className="mt-5 overflow-hidden rounded-2xl border border-brand-100">
-            <iframe
-              src={BOOKING_URL}
-              title="Онлайн-запись Shati Studio"
-              loading="lazy"
-              className="h-[62vh] min-h-[420px] w-full"
-            />
+          <div className="mt-5">
+            <div className="overflow-hidden rounded-2xl border border-brand-100">
+              <iframe
+                src={BOOKING_URL}
+                title="Онлайн-запись Shati Studio"
+                loading="lazy"
+                className="h-[62vh] min-h-[420px] w-full"
+              />
+            </div>
+            <p className="mt-3 text-center text-xs text-ink/45">
+              Форма не загрузилась?{" "}
+              <a
+                href={BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-brand-600 underline-offset-4 hover:underline"
+              >
+                Открыть онлайн-запись в новой вкладке
+              </a>
+            </p>
           </div>
         ) : (
           /* Заглушка, пока не задана ссылка на онлайн-запись YClients. */
