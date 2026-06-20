@@ -66,27 +66,29 @@ export default function ServicePricing({
             Итоговая цена зависит от мастера и сложности работы.
           </p>
 
-          {/* Переключатель салона. */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            {LOCATIONS.map((loc, index) => {
-              const active = index === location;
-              return (
-                <button
-                  key={loc}
-                  type="button"
-                  aria-pressed={active}
-                  onClick={() => setLocation(index)}
-                  className={`rounded-full px-6 py-3 text-xs font-medium uppercase tracking-[0.1em] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
-                    active
-                      ? "text-ink-deep ring-2 ring-ink-deep"
-                      : "text-ink-deep/45 ring-1 ring-ink-deep/15 hover:text-ink-deep/70 hover:ring-ink-deep/30"
-                  }`}
-                >
-                  {loc}
-                </button>
-              );
-            })}
-          </div>
+          {/* Переключатель салона — только если адресов больше одного. */}
+          {LOCATIONS.length > 1 && (
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              {LOCATIONS.map((loc, index) => {
+                const active = index === location;
+                return (
+                  <button
+                    key={loc}
+                    type="button"
+                    aria-pressed={active}
+                    onClick={() => setLocation(index)}
+                    className={`rounded-full px-6 py-3 text-xs font-medium uppercase tracking-[0.1em] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+                      active
+                        ? "text-ink-deep ring-2 ring-ink-deep"
+                        : "text-ink-deep/45 ring-1 ring-ink-deep/15 hover:text-ink-deep/70 hover:ring-ink-deep/30"
+                    }`}
+                  >
+                    {loc}
+                  </button>
+                );
+              })}
+            </div>
+          )}
         </header>
 
         <div className="mt-14 sm:mt-16">

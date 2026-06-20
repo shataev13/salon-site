@@ -3,6 +3,7 @@ import Logo from "./Logo";
 import {
   PHONE_DISPLAY,
   PHONE_HREF,
+  PHONES_EXTRA,
   TELEGRAM_HREF,
   WHATSAPP_HREF,
 } from "@/lib/site";
@@ -32,7 +33,7 @@ const SOCIALS: Social[] = [
   { name: "WhatsApp", href: WHATSAPP_HREF, icon: "whatsapp" },
 ];
 
-const ADDRESSES = ["Москва, Тверской бульвар", "Москва, Щёлковская"];
+const ADDRESSES = ["Москва, 4-й Ростовский переулок, 2с2"];
 
 type SocialIcon = "vk" | "instagram" | "telegram" | "whatsapp";
 
@@ -90,7 +91,7 @@ export default async function Footer() {
             </Link>
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/45">
               Салон красоты в центре Москвы. Премиальный уход и внимание к
-              деталям с 2009 года.
+              деталям с 2004 года.
             </p>
             <ul className="mt-7 flex flex-wrap items-center gap-3">
               {SOCIALS.map((social) => (
@@ -152,12 +153,25 @@ export default async function Footer() {
           {/* Контакты. */}
           <div>
             <ColumnTitle>Контакты</ColumnTitle>
+            {/* Основной номер — выделен; остальные с переадресацией на него. */}
             <a
               href={PHONE_HREF}
-              className="mt-5 inline-block text-lg font-medium text-white transition-colors hover:text-brand-300"
+              className="mt-5 inline-block text-xl font-semibold text-white transition-colors hover:text-brand-300"
             >
               {PHONE_DISPLAY}
             </a>
+            <ul className="mt-2 space-y-1">
+              {PHONES_EXTRA.map((phone) => (
+                <li key={phone.href}>
+                  <a
+                    href={phone.href}
+                    className="text-sm text-white/50 transition-colors hover:text-brand-300"
+                  >
+                    {phone.display}
+                  </a>
+                </li>
+              ))}
+            </ul>
             <ul className="mt-4 space-y-3 text-sm text-white/50">
               {ADDRESSES.map((address) => (
                 <li key={address} className="flex items-start gap-2.5">

@@ -1,9 +1,14 @@
 /* Общие данные сайта: контакты и структура навигации.
    Держим в одном месте, чтобы хедер, меню и модалка не расходились. */
 
-export const PHONE_DISPLAY = "+7 499 248-22-25";
-export const PHONE_HREF = "tel:+74992482225";
-export const WHATSAPP_HREF = "https://wa.me/74992482225";
+export const PHONE_DISPLAY = "+7 (968) 742-33-23";
+export const PHONE_HREF = "tel:+79687423323";
+/* Дополнительные номера — звонки переадресуются на основной. */
+export const PHONES_EXTRA: { display: string; href: string }[] = [
+  { display: "+7 (499) 248-54-46", href: "tel:+74992485446" },
+  { display: "+7 (499) 248-22-25", href: "tel:+74992482225" },
+];
+export const WHATSAPP_HREF = "https://wa.me/79687423323";
 // TODO: заменить на реальный @username студии в Telegram.
 export const TELEGRAM_HREF = "https://t.me/shatistudio";
 

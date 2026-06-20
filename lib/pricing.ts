@@ -2,7 +2,7 @@
    Цены — из текста салона. Структура: категория → группы → позиции.
    Фото — слот (placeholder-градиент), заменяется реальным снимком. */
 
-export const LOCATIONS = ["Тверской бульвар", "Щёлковская"] as const;
+export const LOCATIONS = ["4-й Ростовский переулок, 2с2"] as const;
 
 export type PriceItem = {
   name: string;
