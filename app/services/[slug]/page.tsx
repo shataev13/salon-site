@@ -41,41 +41,47 @@ export default async function ServicePage({ params }: Params) {
     <BookingProvider>
       <Header variant="solid" services={services} />
       <main>
-        {/* Первый экран: фото-панель + текст + запись + контакты. */}
-        <section className="mx-auto grid max-w-[1240px] items-center gap-10 bg-surface-warm px-6 py-16 sm:py-20 md:grid-cols-2 md:gap-14 lg:gap-20">
-          <div
-            className={`relative aspect-[3/4] w-full overflow-hidden rounded-[20px] ${service.photo ? "bg-surface" : service.placeholder}`}
-          >
-            {service.photo && (
-              <Image
-                src={service.photo}
-                alt={service.title}
-                fill
-                sizes="(max-width: 768px) 100vw, 600px"
-                className="object-cover"
-                preload
-              />
-            )}
-          </div>
-
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
-              {num} — Услуга
-            </p>
-            <span
-              aria-hidden="true"
-              className="mt-5 block h-0.5 w-10 rounded-full bg-accent"
-            />
-            <h1 className="mt-7 text-4xl font-medium uppercase tracking-[0.12em] text-ink-deep sm:text-5xl lg:text-6xl">
-              {service.title}
-            </h1>
-            <p className="mt-6 max-w-md leading-relaxed text-ink-deep/65 sm:text-lg">
-              {description}
-            </p>
-            <div className="mt-9">
-              <BookingButton size="lg" />
+        {/* Первый экран: фон во всю ширину, контент по центру. */}
+        <section className="bg-surface-warm">
+          <div className="mx-auto grid max-w-[1240px] items-center gap-10 px-6 py-16 sm:py-20 md:grid-cols-2 md:gap-14 lg:gap-20">
+            {/* Фото: на десктопе слева, на мобиле — под текстом и компактное. */}
+            <div className="order-2 mx-auto w-full max-w-xs md:order-1 md:max-w-none">
+              <div
+                className={`relative aspect-[3/4] w-full overflow-hidden rounded-[20px] ${service.photo ? "bg-surface" : service.placeholder}`}
+              >
+                {service.photo && (
+                  <Image
+                    src={service.photo}
+                    alt={service.title}
+                    fill
+                    sizes="(max-width: 768px) 320px, 600px"
+                    className="object-cover"
+                    preload
+                  />
+                )}
+              </div>
             </div>
-            <ContactIcons className="mt-8" />
+
+            {/* Текст: на мобиле первым — сразу видно, что за услуга. */}
+            <div className="order-1 text-center md:order-2 md:text-left">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+                {num} — Услуга
+              </p>
+              <span
+                aria-hidden="true"
+                className="mx-auto mt-5 block h-0.5 w-10 rounded-full bg-accent md:mx-0"
+              />
+              <h1 className="mt-7 break-words text-4xl font-medium uppercase tracking-[0.12em] text-ink-deep sm:text-5xl">
+                {service.title}
+              </h1>
+              <p className="mx-auto mt-6 max-w-md leading-relaxed text-ink-deep/65 sm:text-lg md:mx-0">
+                {description}
+              </p>
+              <div className="mt-9 flex justify-center md:justify-start">
+                <BookingButton size="lg" />
+              </div>
+              <ContactIcons className="mt-8 justify-center md:justify-start" />
+            </div>
           </div>
         </section>
 
