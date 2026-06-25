@@ -9,18 +9,39 @@ import { getServices } from "@/lib/sheet";
 export const metadata: Metadata = {
   title: "Подарочный сертификат — Shati Studio",
   description:
-    "Подарочный сертификат Shati Studio: выберите номинал и оформите онлайн — отличный подарок себе или близким.",
+    "Подарочный сертификат Shati Studio: женский и мужской, разные номиналы. Отличный подарок себе или близким.",
 };
 
-/* Доступные номиналы сертификата. */
-const DENOMINATIONS = [
-  "5 000 ₽",
-  "7 000 ₽",
-  "10 000 ₽",
-  "15 000 ₽",
-  "20 000 ₽",
-  "30 000 ₽",
+/* Две карты: женская (до 100 000 ₽) и мужская (до 50 000 ₽). */
+const CERTIFICATES = [
+  {
+    title: "Женский сертификат",
+    image: "/gift-card-female.svg",
+    denominations: [
+      "5 000 ₽",
+      "10 000 ₽",
+      "20 000 ₽",
+      "30 000 ₽",
+      "50 000 ₽",
+      "100 000 ₽",
+    ],
+  },
+  {
+    title: "Мужской сертификат",
+    image: "/gift-card-male.svg",
+    denominations: [
+      "5 000 ₽",
+      "10 000 ₽",
+      "15 000 ₽",
+      "20 000 ₽",
+      "30 000 ₽",
+      "50 000 ₽",
+    ],
+  },
 ];
+
+/* Куда ведёт «Купить»: онлайн-оплата YClients (когда подключат) или телефон. */
+const BUY_HREF = GIFT_CERTIFICATE_URL || PHONE_HREF;
 
 export default async function GiftCardsPage() {
   const services = await getServices();
@@ -41,9 +62,9 @@ export default async function GiftCardsPage() {
                 Подарочный сертификат
               </h1>
               <p className="mt-6 leading-relaxed text-ink-deep/65 sm:text-lg">
-                Больше не нужно думать о подарке близкому человеку. Выберите
-                номинал и оформите подарочный сертификат на услуги Shati Studio —
-                себе или в подарок.
+                Лучший подарок себе или близким. Женский сертификат — до
+                100 000 ₽, мужской — до 50 000 ₽. Выберите номинал и оформите за
+                пару минут.
               </p>
               {!GIFT_CERTIFICATE_URL && (
                 <p className="mx-auto mt-5 max-w-md rounded-full bg-surface px-5 py-2.5 text-sm text-ink-deep/70">
@@ -60,33 +81,41 @@ export default async function GiftCardsPage() {
               )}
             </header>
 
-            {/* Сетка номиналов: 1 → 2 → 3 колонки. Без подложки — у самой
-                карты мягкая тень, чтобы она «лежала» над фоном. */}
-            <ul className="mt-14 grid grid-cols-1 gap-x-8 gap-y-14 sm:mt-20 sm:grid-cols-2 lg:grid-cols-3">
-              {DENOMINATIONS.map((denom) => (
-                <li
-                  key={denom}
-                  className="flex flex-col items-center text-center"
-                >
-                  <Image
-                    src="/gift_card_no_background.webp"
-                    alt={`Подарочный сертификат Shati Studio на ${denom}`}
-                    width={2048}
-                    height={1528}
-                    sizes="(max-width: 640px) 86vw, (max-width: 1024px) 44vw, 360px"
-                    className="h-auto w-full max-w-sm drop-shadow-[0_22px_45px_-22px_var(--brand-900)]"
-                  />
-                  <p className="mt-6 text-xl font-medium text-ink-deep">
-                    {denom}
-                  </p>
-                  <BookingButton
-                    label="Купить"
-                    href={GIFT_CERTIFICATE_URL || PHONE_HREF}
-                    className="mt-5 w-full max-w-xs"
-                  />
-                </li>
+            {/* Два типа карт, у каждого — свой набор номиналов. */}
+            <div className="mt-16 space-y-16 sm:mt-20 sm:space-y-20">
+              {CERTIFICATES.map((cert) => (
+                <div key={cert.title}>
+                  <h2 className="text-center text-2xl font-medium uppercase tracking-[0.12em] text-ink-deep sm:text-3xl">
+                    {cert.title}
+                  </h2>
+                  <ul className="mt-10 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+                    {cert.denominations.map((denom) => (
+                      <li
+                        key={denom}
+                        className="flex flex-col items-center text-center"
+                      >
+                        <Image
+                          src={cert.image}
+                          alt={`${cert.title} Shati Studio на ${denom}`}
+                          width={420}
+                          height={266}
+                          sizes="(max-width: 640px) 88vw, (max-width: 1024px) 44vw, 380px"
+                          className="h-auto w-full max-w-sm drop-shadow-[0_18px_40px_-20px_var(--brand-900)]"
+                        />
+                        <p className="mt-6 text-xl font-medium text-ink-deep">
+                          {denom}
+                        </p>
+                        <BookingButton
+                          label="Купить"
+                          href={BUY_HREF}
+                          className="mt-5 w-full max-w-xs"
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </ul>
+            </div>
 
             {/* Условия. */}
             <p className="mx-auto mt-16 max-w-3xl text-center text-sm leading-relaxed text-ink-deep/50 sm:mt-20">
