@@ -74,13 +74,13 @@ export default function GiftCard() {
             onPointerLeave={handleLeave}
             className="gift-tilt relative mx-auto aspect-[7/5] w-full max-w-md"
           >
-            {/* Мужская карта — сзади. */}
+            {/* Мужская карта — чуть позади, выглядывает из-за женской. */}
             <Image
               src="/gift-card-male.svg"
               alt="Мужской подарочный сертификат Shati Studio"
               width={420}
               height={266}
-              className="absolute left-0 top-0 h-auto w-[78%] -rotate-6 drop-shadow-[0_22px_45px_-20px_var(--brand-900)]"
+              className="absolute left-1/2 top-1/2 h-auto w-[80%] -translate-x-[38%] -translate-y-[60%] rotate-[5deg] drop-shadow-[0_22px_45px_-20px_var(--brand-900)]"
             />
             {/* Женская карта — спереди. */}
             <Image
@@ -88,7 +88,7 @@ export default function GiftCard() {
               alt="Женский подарочный сертификат Shati Studio"
               width={420}
               height={266}
-              className="absolute bottom-0 right-0 h-auto w-[80%] rotate-3 drop-shadow-[0_26px_50px_-20px_var(--brand-900)]"
+              className="absolute left-1/2 top-1/2 h-auto w-[82%] -translate-x-1/2 -translate-y-1/2 drop-shadow-[0_28px_55px_-22px_var(--brand-900)]"
             />
           </div>
         </div>
