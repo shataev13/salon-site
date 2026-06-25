@@ -11,7 +11,7 @@ const sizeClasses: Record<Size, string> = {
 };
 
 const baseClass =
-  "group bg-brand-500 text-white shadow-[0_8px_30px_-12px_var(--brand-700)] transition-[background-color,transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:bg-brand-600 hover:shadow-[0_14px_40px_-12px_var(--brand-600)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300 focus-visible:ring-offset-2 focus-visible:ring-offset-background active:translate-y-0";
+  "group bg-[image:var(--brand-gradient-strong)] text-white shadow-[0_8px_30px_-12px_var(--brand-800)] transition-[transform,box-shadow,filter] duration-300 hover:-translate-y-0.5 hover:brightness-[1.06] hover:shadow-[0_14px_40px_-12px_var(--brand-700)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300 focus-visible:ring-offset-2 focus-visible:ring-offset-background active:translate-y-0";
 
 /* Главное действие сайта. Без href — открывает модалку записи; с href —
    рендерится ссылкой (переход на страницу). variant="icon" — компактная
