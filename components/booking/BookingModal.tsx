@@ -2,7 +2,13 @@
 
 import { useEffect, useId, useRef } from "react";
 import { createPortal } from "react-dom";
-import { BOOKING_URL, PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
+import {
+  BOOKING_URL,
+  PHONE_DISPLAY,
+  PHONE_HREF,
+  TELEGRAM_HREF,
+  WHATSAPP_HREF,
+} from "@/lib/site";
 
 const FOCUSABLE =
   'a[href], button:not([disabled]), textarea, input, select, iframe, [tabindex]:not([tabindex="-1"])';
@@ -96,35 +102,68 @@ export default function BookingModal({
         tabIndex={-1}
         className="u-drawer-in absolute inset-y-0 right-0 flex w-full flex-col bg-background shadow-2xl outline-none sm:w-[480px] lg:w-[560px]"
       >
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="Закрыть онлайн-запись"
-          className="absolute left-3 top-3 z-10 grid size-10 place-items-center rounded-full bg-background/90 text-ink shadow-md ring-1 ring-ink/10 backdrop-blur transition-colors hover:bg-background hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300"
-        >
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 24 24"
-            className="size-5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            strokeLinecap="round"
+        {/* Шапка панели: уведомление о записи + кнопка закрытия. */}
+        <div className="flex items-start gap-3 border-b border-brand-100 bg-surface px-4 py-3">
+          <p className="flex-1 text-xs leading-relaxed text-ink/70">
+            Приложения онлайн-записи временно недоступны в App&nbsp;Store — мы
+            знаем о проблеме. Запись на сайте работает, а уведомления приходят в
+            мессенджерах:{" "}
+            <a
+              href={WHATSAPP_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-brand-600 hover:underline"
+            >
+              WhatsApp
+            </a>
+            {" · "}
+            <a
+              href={TELEGRAM_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-brand-600 hover:underline"
+            >
+              Telegram
+            </a>
+            {" · "}
+            <a
+              href={PHONE_HREF}
+              className="whitespace-nowrap font-medium text-brand-600 hover:underline"
+            >
+              {PHONE_DISPLAY}
+            </a>
+            .
+          </p>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Закрыть онлайн-запись"
+            className="grid size-9 shrink-0 place-items-center rounded-full text-ink/60 transition-colors hover:bg-background hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300"
           >
-            <path d="M6 6l12 12M18 6L6 18" />
-          </svg>
-        </button>
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              className="size-5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+            >
+              <path d="M6 6l12 12M18 6L6 18" />
+            </svg>
+          </button>
+        </div>
 
         {BOOKING_URL ? (
           /* Виджет онлайн-записи YClients — на всю панель. */
           <iframe
             src={BOOKING_URL}
             title="Онлайн-запись Shati Studio"
-            className="h-full w-full border-0"
+            className="w-full flex-1 border-0"
           />
         ) : (
           /* Заглушка, пока не задана ссылка на онлайн-запись YClients. */
-          <div className="flex h-full flex-col items-center justify-center gap-5 px-8 text-center">
+          <div className="flex flex-1 flex-col items-center justify-center gap-5 px-8 text-center">
             <span className="grid size-12 place-items-center rounded-full bg-brand-100 text-brand-600">
               <svg
                 aria-hidden="true"
