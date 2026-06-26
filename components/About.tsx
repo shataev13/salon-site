@@ -1,19 +1,26 @@
 import Image from "next/image";
 import AboutGallery, { type GalleryPhoto } from "./AboutGallery";
 
-/* Фото интерьера для карусели. Заполнить файлами из /public, когда загрузят
-   (например: { src: "/about/zal.jpg", alt: "Парикмахерский зал" }). */
-const ABOUT_GALLERY: GalleryPhoto[] = [];
+/* Фото интерьера салона для карусели. */
+const ABOUT_GALLERY: GalleryPhoto[] = [
+  { src: "/about/reception.jpg", alt: "Ресепшн Shati Studio" },
+  { src: "/about/hall.jpg", alt: "Интерьер салона Shati Studio" },
+  { src: "/about/hair-1.jpg", alt: "Парикмахерский зал Shati Studio" },
+  { src: "/about/hair-2.jpg", alt: "Парикмахерский зал Shati Studio" },
+  { src: "/about/hair-3.jpg", alt: "Парикмахерский зал Shati Studio" },
+  { src: "/about/nails.jpg", alt: "Зона маникюра Shati Studio" },
+  { src: "/about/cosmetology.jpg", alt: "Кабинет косметологии Shati Studio" },
+];
 
 export default function About() {
   return (
     <section id="about" className="bg-background py-20 sm:py-28">
       <div className="mx-auto grid max-w-[1240px] items-center gap-12 px-6 md:grid-cols-2 md:gap-16 lg:gap-20">
         {/* Главное фото — фасад салона. */}
-        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[24px] shadow-[0_30px_70px_-32px_var(--brand-900)] ring-1 ring-ink-deep/5">
+        <div className="relative aspect-[3/2] w-full overflow-hidden rounded-[24px] shadow-[0_30px_70px_-32px_var(--brand-900)] ring-1 ring-ink-deep/5">
           <Image
-            src="/hero-poster.jpg"
-            alt="Салон красоты Shati Studio в центре Москвы"
+            src="/about/facade.webp"
+            alt="Фасад салона красоты Shati Studio в центре Москвы"
             fill
             sizes="(max-width: 768px) 100vw, 600px"
             className="object-cover"

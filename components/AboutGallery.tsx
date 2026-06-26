@@ -65,14 +65,14 @@ export default function AboutGallery({ photos }: { photos: GalleryPhoto[] }) {
           <li
             key={photo.src}
             data-card
-            className="shrink-0 snap-start basis-[78%] sm:basis-[46%] lg:basis-[31%]"
+            className="shrink-0 snap-start basis-[68%] sm:basis-[40%] lg:basis-[27%]"
           >
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-surface ring-1 ring-ink-deep/5">
+            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-surface ring-1 ring-ink-deep/5">
               <Image
                 src={photo.src}
                 alt={photo.alt}
                 fill
-                sizes="(max-width: 640px) 78vw, (max-width: 1024px) 46vw, 400px"
+                sizes="(max-width: 640px) 68vw, (max-width: 1024px) 40vw, 320px"
                 className="object-cover"
               />
             </div>
