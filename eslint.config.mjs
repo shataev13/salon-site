@@ -12,11 +12,6 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
-    // Cloudflare / OpenNext build output:
-    ".open-next/**",
-    ".wrangler/**",
-    // Node runtime entry for Passenger/ISPmanager (CommonJS):
-    "server.js",
   ]),
 ]);
 

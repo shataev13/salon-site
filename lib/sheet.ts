@@ -166,19 +166,12 @@ const csvUrl = (): string | null => {
   return SHEET_GID ? `${base}&gid=${encodeURIComponent(SHEET_GID)}` : base;
 };
 
-/** Загружает лист таблицы как CSV. null — если не настроено/недоступно.
-   С таймаутом: если таблица отвечает дольше ~3.5 сек — быстро откатываемся
-   на цены из кода, чтобы страница услуги не «висела». */
+/** Загружает лист таблицы как CSV. null — если не настроено/недоступно. */
 async function fetchPriceRows(): Promise<Row[] | null> {
   const url = csvUrl();
   if (!url) return null;
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 3500);
   try {
-    const res = await fetch(url, {
-      next: { revalidate: REVALIDATE },
-      signal: controller.signal,
-    });
+    const res = await fetch(url, { next: { revalidate: REVALIDATE } });
     if (!res.ok) return null;
     const text = await res.text();
     // Закрытая таблица отдаёт HTML (страница входа) — это не наши данные.
@@ -186,8 +179,6 @@ async function fetchPriceRows(): Promise<Row[] | null> {
     return toRows(parseCsv(text));
   } catch {
     return null;
-  } finally {
-    clearTimeout(timer);
   }
 }
 
