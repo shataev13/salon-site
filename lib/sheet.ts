@@ -197,8 +197,17 @@ function buildPriceCategories(rows: Row[]): PriceCategory[] {
     byCategory.get(key)!.push({ name, price, note });
   }
 
-  const itemsOf = (category: string) =>
-    keepUniqueNotes(byCategory.get(category.toLowerCase()) ?? []);
+  const itemsOf = (category: string): PriceItem[] => {
+    // Перманентный макияж — фиксированные цены салона (перекрывают таблицу).
+    if (category.trim().toLowerCase() === "перманентный макияж") {
+      return [
+        { name: "Первичка: брови / губы / межресничка", price: "16 000 ₽" },
+        { name: "Коррекция", price: "9 000 ₽" },
+        { name: "Ремувер", price: "4 000 ₽" },
+      ];
+    }
+    return keepUniqueNotes(byCategory.get(category.toLowerCase()) ?? []);
+  };
 
   // Берём метаданные разделов (id/title/intro/placeholder) из кода,
   // а наполнение — из таблицы. Раздел без данных в таблице остаётся как в коде.
