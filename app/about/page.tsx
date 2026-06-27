@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { BookingProvider } from "@/components/booking/BookingProvider";
 import Header from "@/components/Header";
 import About from "@/components/About";
+import Services from "@/components/Services";
+import GiftCard from "@/components/GiftCard";
+import Team from "@/components/Team";
+import Map from "@/components/Map";
 import { getServices } from "@/lib/sheet";
 
 export const metadata: Metadata = {
@@ -18,6 +22,10 @@ export default async function AboutPage() {
       <Header variant="solid" services={services} />
       <main>
         <About />
+        <Services />
+        <GiftCard />
+        <Team />
+        <Map />
       </main>
     </BookingProvider>
   );
