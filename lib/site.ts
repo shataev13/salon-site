@@ -70,7 +70,7 @@ export type NavLink = {
 
 export const NAV_LINKS: NavLink[] = [
   { label: "Услуги", href: "/#services", hasMenu: true },
-  { label: "О салоне", href: "/#about" },
+  { label: "О салоне", href: "/about" },
   { label: "Персонал", href: "/#team" },
   { label: "Подарочный сертификат", href: "/gift-cards", accent: true },
 ];

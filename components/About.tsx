@@ -4,10 +4,8 @@ import AboutGallery, { type GalleryPhoto } from "./AboutGallery";
 /* Фото интерьера салона для карусели. */
 const ABOUT_GALLERY: GalleryPhoto[] = [
   { src: "/about/reception.jpg", alt: "Ресепшн Shati Studio" },
-  { src: "/about/hall.jpg", alt: "Интерьер салона Shati Studio" },
+  { src: "/about/hall.jpg", alt: "Зона ожидания Shati Studio" },
   { src: "/about/hair-1.jpg", alt: "Парикмахерский зал Shati Studio" },
-  { src: "/about/hair-2.jpg", alt: "Парикмахерский зал Shati Studio" },
-  { src: "/about/hair-3.jpg", alt: "Парикмахерский зал Shati Studio" },
   { src: "/about/nails.jpg", alt: "Зона маникюра Shati Studio" },
   { src: "/about/cosmetology.jpg", alt: "Кабинет косметологии Shati Studio" },
 ];

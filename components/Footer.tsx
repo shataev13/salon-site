@@ -12,6 +12,7 @@ import { getServices } from "@/lib/sheet";
 const NAV = [
   { label: "Главная", href: "/" },
   { label: "Услуги", href: "/#services" },
+  { label: "О салоне", href: "/about" },
   { label: "Наши мастера", href: "/#team" },
   { label: "Материалы", href: "/#materials" },
   { label: "Подарочный сертификат", href: "/gift-cards" },
