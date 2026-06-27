@@ -6,7 +6,7 @@ import BookingButton from "@/components/booking/BookingButton";
 import ContactIcons from "@/components/ContactIcons";
 import Header from "@/components/Header";
 import Services from "@/components/Services";
-import ServicePricing from "@/components/ServicePricing";
+import LivePricing from "@/components/LivePricing";
 import { getPriceCategories, getServices } from "@/lib/sheet";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -85,8 +85,9 @@ export default async function ServicePage({ params }: Params) {
           </div>
         </section>
 
-        {/* Стоимость именно этой услуги. */}
-        {category && <ServicePricing category={category} />}
+        {/* Стоимость именно этой услуги. Цены подтягиваются вживую из
+            Google Таблицы через PHP-прокси (см. components/LivePricing). */}
+        {category && <LivePricing category={category} slug={service.slug} />}
 
         {/* Другие услуги — наш блок карточек. */}
         <Services id="other-services" title="Другие услуги" subtitle="Выберите услугу" />
