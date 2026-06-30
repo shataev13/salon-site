@@ -19,7 +19,7 @@ export default function Hero() {
       {/* Контент в нижней части экрана: кикер, короткий заголовок, действие. */}
       <div className="relative z-10 flex flex-col items-center">
         <p className="u-reveal u-reveal--d1 text-[11px] font-medium uppercase tracking-[0.28em] text-brand-100 sm:text-xs">
-          Салон красоты в центре Москвы · EST. 2004
+          Салон красоты в центре Москвы · с 2004
         </p>
 
         <h1 className="u-reveal u-reveal--d2 mt-5 max-w-2xl font-display text-3xl font-medium leading-[1.1] text-white sm:text-4xl lg:text-5xl">

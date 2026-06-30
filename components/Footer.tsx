@@ -87,9 +87,8 @@ export default async function Footer() {
             <Link href="/" aria-label="Shati Studio — на главную" className="inline-block">
               <Logo imgClassName="h-9 w-auto" textClassName="text-2xl" />
             </Link>
-            <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/45">
-              Салон красоты в центре Москвы. Премиальный уход и внимание к
-              деталям с 2004 года.
+            <p className="mt-5 text-sm font-medium uppercase tracking-[0.25em] text-white/45">
+              EST. 2004
             </p>
             <ul className="mt-7 flex flex-wrap items-center gap-3">
               {SOCIALS.map((social) => (
