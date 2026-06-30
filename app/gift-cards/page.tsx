@@ -102,7 +102,7 @@ export default async function GiftCardsPage() {
                           sizes="(max-width: 640px) 88vw, (max-width: 1024px) 44vw, 380px"
                           className="h-auto w-full max-w-sm drop-shadow-[0_18px_40px_-20px_var(--brand-900)]"
                         />
-                        <p className="mt-6 font-display text-3xl font-medium text-ink-deep sm:text-4xl">
+                        <p className="mt-6 font-display text-3xl font-medium tracking-[-0.02em] text-ink-deep [word-spacing:-0.22em] sm:text-4xl">
                           {denom}
                         </p>
                         <BookingButton
