@@ -17,11 +17,10 @@ export const TELEGRAM_HREF = "https://t.me/shatistudio";
 export const BOOKING_URL =
   process.env.NEXT_PUBLIC_BOOKING_URL?.trim() || "https://n2279892.yclients.com";
 
-/* Покупка подарочного сертификата (YClients). Включится, когда подключат
-   онлайн-оплату — тогда впишите сюда ссылку, и кнопки «Купить» сами начнут
-   вести на YClients. Пока пусто — «Купить» ведёт на телефон салона.
-   Ссылка на будущее: https://yclients.com/group_loyalty_certificate_types/2001057 */
-export const GIFT_CERTIFICATE_URL = "";
+/* Покупка подарочного сертификата (YClients). Кнопки «Купить» на странице
+   /gift-cards ведут на эту страницу оплаты. Пусто — «Купить» ведёт на
+   телефон салона. */
+export const GIFT_CERTIFICATE_URL = "https://o19356.yclients.com";
 
 export type Contact = {
   label: string;
