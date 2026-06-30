@@ -19,7 +19,7 @@ export default function Director() {
           <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-accent">
             Генеральный директор
           </p>
-          <h2 className="mt-3 font-display text-4xl font-medium leading-tight text-ink-deep sm:text-5xl">
+          <h2 className="mt-3 font-display text-5xl font-medium leading-tight text-ink-deep sm:text-6xl">
             Светлана Шатаева
           </h2>
 

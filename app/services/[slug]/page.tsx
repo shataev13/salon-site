@@ -71,7 +71,7 @@ export default async function ServicePage({ params }: Params) {
                 aria-hidden="true"
                 className="mx-auto mt-5 block h-0.5 w-10 rounded-full bg-accent md:mx-0"
               />
-              <h1 className="mt-7 text-balance text-3xl font-medium uppercase leading-tight tracking-[0.08em] text-ink-deep sm:text-5xl sm:tracking-[0.12em]">
+              <h1 className="mt-7 text-balance font-display text-4xl font-medium leading-tight text-ink-deep sm:text-5xl">
                 {service.title}
               </h1>
               <p className="mx-auto mt-6 max-w-md leading-relaxed text-ink-deep/65 sm:text-lg md:mx-0">

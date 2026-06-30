@@ -20,18 +20,11 @@ export default async function Services({
       <div className="mx-auto max-w-[1240px] px-6">
         {/* Шапка секции с контурным водяным знаком позади. */}
         <header className="relative flex flex-col items-center py-6 text-center">
-          <span
-            aria-hidden="true"
-            className="u-watermark pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 select-none whitespace-nowrap font-semibold uppercase leading-none tracking-[0.04em] text-[clamp(72px,16vw,188px)]"
-          >
-            BEAUTY
-          </span>
-
-          <span
+<span
             aria-hidden="true"
             className="relative z-10 mb-6 h-0.5 w-10 rounded-full bg-accent"
           />
-          <h2 className="relative z-10 text-4xl font-medium uppercase tracking-[0.14em] text-ink-deep sm:text-5xl">
+          <h2 className="relative z-10 font-display text-4xl font-medium text-ink-deep sm:text-5xl">
             {title}
           </h2>
           <p className="relative z-10 mt-4 text-sm tracking-wide text-ink-deep/50">
@@ -75,7 +68,7 @@ export default async function Services({
 
                 {/* Подпись. */}
                 <div className="absolute inset-x-0 bottom-0 p-5">
-                  <h3 className="text-base font-semibold uppercase leading-snug tracking-[0.12em] text-white">
+                  <h3 className="font-display text-xl font-medium leading-snug text-white">
                     {service.title}
                   </h3>
                   {/* Акцентная линия, удлиняется на hover. */}

@@ -8,7 +8,7 @@ export default function Map() {
             aria-hidden="true"
             className="mb-6 h-0.5 w-10 rounded-full bg-accent"
           />
-          <h2 className="text-4xl font-medium uppercase tracking-[0.14em] text-ink-deep sm:text-5xl">
+          <h2 className="font-display text-4xl font-medium text-ink-deep sm:text-5xl">
             Как нас найти
           </h2>
           <p className="mt-4 text-sm tracking-wide text-ink-deep/50">

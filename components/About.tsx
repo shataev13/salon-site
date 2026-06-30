@@ -31,7 +31,7 @@ export default function About() {
             aria-hidden="true"
             className="mx-auto mb-6 block h-0.5 w-10 rounded-full bg-accent md:mx-0"
           />
-          <h2 className="text-4xl font-medium uppercase tracking-[0.14em] text-ink-deep sm:text-5xl">
+          <h2 className="font-display text-4xl font-medium text-ink-deep sm:text-5xl">
             О салоне
           </h2>
           <p className="mx-auto mt-6 max-w-md leading-relaxed text-ink-deep/70 sm:text-lg md:mx-0">

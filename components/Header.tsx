@@ -13,13 +13,13 @@ import BookingButton from "./booking/BookingButton";
 import Logo from "./Logo";
 import { ContactGlyph } from "./ContactIcons";
 
-// Нижний ярус навигации — капс с трекингом (в духе reference).
+// Нижний ярус навигации — фирменным шрифтом Nuqun.
 const navTierClass =
-  "text-[13px] font-medium uppercase tracking-[0.16em] text-ink/65 transition-colors hover:text-brand-600";
+  "font-display text-[17px] text-ink/75 transition-colors hover:text-brand-600";
 
 // Акцентный пункт «Подарочные карты» в нижнем ярусе.
 const giftTierClass =
-  "inline-flex items-center gap-1.5 whitespace-nowrap text-[13px] font-medium uppercase tracking-[0.16em] text-brand-600 transition-colors hover:text-brand-700";
+  "inline-flex items-center gap-1.5 whitespace-nowrap font-display text-[17px] text-brand-600 transition-colors hover:text-brand-700";
 
 // Круглые иконки связи — фиолетовые, на белом хедере.
 const iconButtonClass =

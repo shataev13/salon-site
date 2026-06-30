@@ -58,7 +58,7 @@ export default async function GiftCardsPage() {
                 aria-hidden="true"
                 className="mx-auto mb-6 block h-0.5 w-10 rounded-full bg-accent"
               />
-              <h1 className="text-4xl font-medium uppercase tracking-[0.14em] text-ink-deep sm:text-5xl">
+              <h1 className="font-display text-4xl font-medium text-ink-deep sm:text-5xl">
                 Подарочный сертификат
               </h1>
               <p className="mt-6 leading-relaxed text-ink-deep/65 sm:text-lg">
@@ -85,7 +85,7 @@ export default async function GiftCardsPage() {
             <div className="mt-16 space-y-16 sm:mt-20 sm:space-y-20">
               {CERTIFICATES.map((cert) => (
                 <div key={cert.title}>
-                  <h2 className="text-center text-2xl font-medium uppercase tracking-[0.12em] text-ink-deep sm:text-3xl">
+                  <h2 className="text-center font-display text-3xl font-medium text-ink-deep sm:text-4xl">
                     {cert.title}
                   </h2>
                   <ul className="mt-10 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
