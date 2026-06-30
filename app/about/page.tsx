@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { BookingProvider } from "@/components/booking/BookingProvider";
 import Header from "@/components/Header";
 import About from "@/components/About";
+import Director from "@/components/Director";
 import Services from "@/components/Services";
 import GiftCard from "@/components/GiftCard";
 import Team from "@/components/Team";
@@ -22,6 +23,7 @@ export default async function AboutPage() {
       <Header variant="solid" services={services} />
       <main>
         <About />
+        <Director />
         <Services />
         <GiftCard />
         <Team />
