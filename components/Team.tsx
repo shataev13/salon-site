@@ -155,7 +155,7 @@ export default function Team() {
           aria-hidden="true"
           className="relative z-10 mb-6 h-0.5 w-10 rounded-full bg-accent"
         />
-        <h2 className="relative z-10 font-display text-4xl font-medium text-ink-deep sm:text-5xl">
+        <h2 className="relative z-10 font-display text-5xl font-medium text-ink-deep sm:text-6xl">
           Наши мастера
         </h2>
         <p className="relative z-10 mt-4 text-sm tracking-wide text-ink-deep/50">

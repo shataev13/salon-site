@@ -59,7 +59,7 @@ export default function ServicePricing({
             aria-hidden="true"
             className="mb-6 h-0.5 w-10 rounded-full bg-accent"
           />
-          <h2 className="font-display text-4xl font-medium text-ink-deep sm:text-5xl">
+          <h2 className="font-display text-5xl font-medium text-ink-deep sm:text-6xl">
             Стоимость услуг
           </h2>
           <p className="mt-4 max-w-md text-sm leading-relaxed tracking-wide text-ink-deep/50">

@@ -15,11 +15,11 @@ import { ContactGlyph } from "./ContactIcons";
 
 // Нижний ярус навигации — фирменным шрифтом Nuqun.
 const navTierClass =
-  "font-display text-[17px] text-ink/75 transition-colors hover:text-brand-600";
+  "font-display text-3xl text-ink/75 transition-colors hover:text-brand-600";
 
 // Акцентный пункт «Подарочные карты» в нижнем ярусе.
 const giftTierClass =
-  "inline-flex items-center gap-1.5 whitespace-nowrap font-display text-[17px] text-brand-600 transition-colors hover:text-brand-700";
+  "inline-flex items-center gap-1.5 whitespace-nowrap font-display text-3xl text-brand-600 transition-colors hover:text-brand-700";
 
 // Круглые иконки связи — фиолетовые, на белом хедере.
 const iconButtonClass =
@@ -114,7 +114,7 @@ function ServicesDropdown({ services }: { services: Service[] }) {
                   onClick={() => setOpen(false)}
                   className="block rounded-xl px-4 py-2.5 transition-colors hover:bg-surface"
                 >
-                  <span className="block text-sm font-medium text-ink">
+                  <span className="block font-display text-lg text-ink">
                     {service.title}
                   </span>
                   <span className="mt-0.5 block text-xs text-ink/55">
@@ -274,7 +274,7 @@ export default function Header({
         <div className="border-t border-ink/10" />
 
         {/* Ярус 2: навигация по центру */}
-        <nav className="mx-auto flex max-w-7xl items-center justify-center gap-9 px-8 py-3.5">
+        <nav className="mx-auto flex max-w-7xl items-center justify-center gap-6 px-8 py-3.5">
           <ServicesDropdown services={services} />
           {plainLinks.map((link) => (
             <Link
@@ -337,7 +337,7 @@ export default function Header({
               type="button"
               aria-expanded={mobileServicesOpen}
               onClick={() => setMobileServicesOpen((v) => !v)}
-              className="u-menu-item flex items-center justify-between py-3 font-display text-2xl text-ink"
+              className="u-menu-item flex items-center justify-between py-3 font-display text-3xl text-ink"
               style={{ animationDelay: "0.05s" }}
             >
               Услуги
@@ -380,7 +380,7 @@ export default function Header({
                   handleHashNav(e, link.href);
                   closeMenu();
                 }}
-                className="u-menu-item py-3 font-display text-2xl text-ink"
+                className="u-menu-item py-3 font-display text-3xl text-ink"
                 style={{ animationDelay: `${0.11 + i * 0.06}s` }}
               >
                 {link.label}
@@ -393,7 +393,7 @@ export default function Header({
                   handleHashNav(e, giftCard.href);
                   closeMenu();
                 }}
-                className="u-menu-item flex items-center gap-2 py-3 font-display text-2xl text-brand-600"
+                className="u-menu-item flex items-center gap-2 py-3 font-display text-3xl text-brand-600"
                 style={{ animationDelay: `${0.11 + plainLinks.length * 0.06}s` }}
               >
                 <Sparkle />

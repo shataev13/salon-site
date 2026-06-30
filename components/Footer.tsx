@@ -27,9 +27,6 @@ const LEGAL = [
 type Social = { name: string; href: string; icon: SocialIcon; meta?: boolean };
 
 const SOCIALS: Social[] = [
-  // TODO: заменить на реальные ссылки сообществ салона.
-  { name: "ВКонтакте", href: "https://vk.com", icon: "vk" },
-  { name: "Instagram", href: "https://instagram.com", icon: "instagram", meta: true },
   { name: "Telegram", href: TELEGRAM_HREF, icon: "telegram" },
   { name: "WhatsApp", href: WHATSAPP_HREF, icon: "whatsapp" },
 ];
@@ -208,10 +205,6 @@ export default async function Footer() {
             ))}
           </ul>
           <div className="mt-6 flex flex-col gap-3 text-xs leading-relaxed text-white/35 sm:flex-row sm:items-end sm:justify-between">
-            <p className="max-w-2xl">
-              * Meta (Instagram, Facebook) признана экстремистской организацией
-              и запрещена на территории РФ.
-            </p>
             {/* TODO: реквизиты ИП / ИНН / ОГРНИП. */}
             <p className="shrink-0">© Shati Studio, 2026. Все права защищены.</p>
           </div>
