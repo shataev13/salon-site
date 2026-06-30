@@ -20,7 +20,14 @@ export default async function Services({
       <div className="mx-auto max-w-[1240px] px-6">
         {/* Шапка секции с контурным водяным знаком позади. */}
         <header className="relative flex flex-col items-center py-6 text-center">
-<span
+          <span
+            aria-hidden="true"
+            className="u-watermark pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 select-none whitespace-nowrap font-semibold uppercase leading-none tracking-[0.04em] text-[clamp(72px,16vw,188px)]"
+          >
+            BEAUTY
+          </span>
+
+          <span
             aria-hidden="true"
             className="relative z-10 mb-6 h-0.5 w-10 rounded-full bg-accent"
           />

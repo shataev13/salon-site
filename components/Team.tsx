@@ -144,7 +144,14 @@ export default function Team() {
     >
       {/* Шапка с контурным водяным знаком позади. */}
       <header className="relative mx-auto flex max-w-[1240px] flex-col items-center px-6 py-6 text-center">
-<span
+        <span
+          aria-hidden="true"
+          className="u-watermark pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 select-none whitespace-nowrap font-semibold uppercase leading-none tracking-[0.04em] text-[clamp(72px,16vw,188px)]"
+        >
+          TEAM
+        </span>
+
+        <span
           aria-hidden="true"
           className="relative z-10 mb-6 h-0.5 w-10 rounded-full bg-accent"
         />
