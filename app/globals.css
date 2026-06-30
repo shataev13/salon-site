@@ -26,9 +26,8 @@
   --color-surface-accent: var(--surface-accent);
   --color-ink-deep: var(--ink-deep);
 
-  --font-display: var(--font-playfair);
-  --font-sans: var(--font-montserrat);
-  --font-script: var(--font-pacifico);
+  --font-display: var(--font-nuqun);
+  --font-sans: var(--font-inter-tight);
 }
 
 @layer base {

@@ -1,27 +1,23 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Montserrat, Pacifico } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin", "cyrillic"],
-  display: "swap",
-});
-
-// Основной текстовый шрифт (body / интерфейс).
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
-  subsets: ["latin", "cyrillic"],
-  display: "swap",
-});
-
-// Скрипт-шрифт для временного вордмарка, пока нет файла логотипа.
-const pacifico = Pacifico({
-  variable: "--font-pacifico",
-  subsets: ["latin"],
+// Заголовочный (акцентный) шрифт — заголовки секций и хедера. Локальный
+// файл, начертание одно (Regular), поэтому weight задаём явно.
+const nuqun = localFont({
+  src: "./fonts/Nuqun-Regular.otf",
+  variable: "--font-nuqun",
   weight: "400",
+  display: "swap",
+});
+
+// Основной текстовый шрифт (body / интерфейс / текст под заголовками).
+const interTight = localFont({
+  src: "./fonts/InterTight-Light.ttf",
+  variable: "--font-inter-tight",
+  weight: "300",
   display: "swap",
 });
 
@@ -39,7 +35,7 @@ export default function RootLayout({
   return (
     <html
       lang="ru"
-      className={`${playfair.variable} ${montserrat.variable} ${pacifico.variable} h-full antialiased`}
+      className={`${nuqun.variable} ${interTight.variable} h-full antialiased`}
     >
       <body className="flex min-h-screen flex-col">
         <div className="flex-1">{children}</div>
