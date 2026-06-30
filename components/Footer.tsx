@@ -19,9 +19,10 @@ const NAV = [
 ];
 
 const LEGAL = [
-  { label: "Политика конфиденциальности", href: "#" },
-  { label: "Договор оферты", href: "#" },
-  { label: "Правила посещения", href: "#" },
+  { label: "Политика конфиденциальности", href: "/policy" },
+  { label: "Согласие на обработку ПДн", href: "/consent" },
+  { label: "Договор оферты", href: "/offer" },
+  { label: "Правила посещения", href: "/rules" },
 ];
 
 type Social = { name: string; href: string; icon: SocialIcon; meta?: boolean };
@@ -197,9 +198,9 @@ export default async function Footer() {
           <ul className="flex flex-wrap gap-x-6 gap-y-2">
             {LEGAL.map((item) => (
               <li key={item.label}>
-                <a href={item.href} className="text-xs text-white/50 transition-colors hover:text-brand-300">
+                <Link href={item.href} className="text-xs text-white/50 transition-colors hover:text-brand-300">
                   {item.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
